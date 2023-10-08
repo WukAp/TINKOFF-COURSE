@@ -25,14 +25,11 @@ public class Task1 {
      * @return amount of seconds
      */
     public int minutesToSeconds(String timeInMMSSFormat) {
-
         String[] time = timeInMMSSFormat.split(":");
         if (time.length != 2 || !isArrayOfNumbers(time) || Integer.parseInt(time[1]) >= MAX_SECONDS) {
             return -1;
         } else {
             return Integer.parseInt(time[1]) + Integer.parseInt(time[0]) * MAX_SECONDS;
         }
-
     }
-
 }

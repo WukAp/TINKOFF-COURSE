@@ -8,6 +8,9 @@ public class Task4 {
      * @return fixed string
      */
     public String fixString(String brokenString) {
+        if (brokenString == null) {
+            throw new IllegalArgumentException("input string shouldn't be null");
+        }
         char[] fracturedString = brokenString.toCharArray();
         for (int i = 0; i < fracturedString.length - 1; i += 2) {
             char buf = fracturedString[i];

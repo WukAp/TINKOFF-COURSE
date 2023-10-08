@@ -24,7 +24,6 @@ public class Task5 {
         if (numberStr.length() % 2 == 1) {
             return null;
         }
-
         int number = Integer.parseInt(String.valueOf(numberStr));
         StringBuilder children = new StringBuilder();
         for (int i = 0; i < numberStr.length() / 2; i++) {
@@ -41,14 +40,13 @@ public class Task5 {
      * @return true if descendant palindrome and false if not
      */
     public boolean isPalindromeDescendant(int number) {
-        StringBuilder numberStr = new StringBuilder(String.valueOf(number));
-        while (numberStr != null && numberStr.length() > 1) {
+        StringBuilder numberStr = new StringBuilder(String.valueOf(Math.abs(number)));
+        do {
             if (isPalindrome(numberStr)) {
                 return true;
             }
             numberStr = getChildOfNumber(numberStr);
-        }
+        } while (numberStr != null && numberStr.length() > 1);
         return false;
     }
-
 }

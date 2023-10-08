@@ -12,6 +12,9 @@ public class Task3 {
      * @return is arrays nestable
      */
     public boolean isNestable(int[] a1, int[] a2) {
+        if (a1 == null || a2 == null || a1.length == 0 || a2.length == 0) {
+            throw new IllegalArgumentException("input arrays shouldn't be empty");
+        }
         int minA1 = a1[0];
         int maxA1 = a1[0];
         int minA2 = a2[0];
@@ -27,11 +30,4 @@ public class Task3 {
         }
         return minA1 > minA2 && maxA1 < maxA2;
     }
-
-//    static void main(String[] args) {
-//        System.out.println(isNestable(new int[] {1, 2, 3, 4}, new int[] {0, 6}));
-//        System.out.println(isNestable(new int[] {3, 1}, new int[] {4, 0}));
-//        System.out.println(isNestable(new int[] {9, 9, 8}, new int[] {8, 9}));
-//        System.out.println(isNestable(new int[] {1, 2, 3, 4}, new int[] {2, 3}));
-//    }
 }

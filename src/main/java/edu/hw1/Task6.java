@@ -3,6 +3,8 @@ package edu.hw1;
 import java.util.Arrays;
 
 public class Task6 {
+    public static final int MIN_PERMISSIBLE_NUMBER = 1001;
+    public static final int MAX_PERMISSIBLE_NUMBER = 9999;
     public static final char[] KAPREKAR_CONST = new char[] {'6', '1', '7', '4'};
 
     /**
@@ -43,6 +45,9 @@ public class Task6 {
      * @return the amount of steps
      */
     public int countK(int number) {
+        if (number < MIN_PERMISSIBLE_NUMBER || number > MAX_PERMISSIBLE_NUMBER) {
+            throw new IllegalArgumentException("input number should be in range 1001..9999");
+        }
         char[] numberChr = String.valueOf(number).toCharArray();
         return countKHelper(numberChr, 0);
     }
