@@ -6,40 +6,35 @@ import org.junit.jupiter.api.Test;
 class Task1Test {
     private final Task1 testTask1 = new Task1();
 
-    @Test
-    void minutesToSecondsWithCorrectParams() {
-        String testString1 = "0:0";
-        Assertions.assertEquals(0, testTask1.minutesToSeconds(testString1));
+    @Test void minutesToSecondsWithCorrectParams() {
+        Assertions.assertEquals(0, testTask1.minutesToSeconds("0:0"));
 
-        String testString2 = "0:50";
-        Assertions.assertEquals(50, testTask1.minutesToSeconds(testString2));
+        Assertions.assertEquals(50, testTask1.minutesToSeconds("0:50"));
 
-        String testString3 = "1:00";
-        Assertions.assertEquals(60, testTask1.minutesToSeconds(testString3));
+        Assertions.assertEquals(60, testTask1.minutesToSeconds("1:00"));
 
-        String testString4 = "1:10";
-        Assertions.assertEquals(70, testTask1.minutesToSeconds(testString4));
+        Assertions.assertEquals(70, testTask1.minutesToSeconds("1:10"));
 
-        String testString5 = "1000:10";
-        Assertions.assertEquals(60010, testTask1.minutesToSeconds(testString5));
+        Assertions.assertEquals(60010, testTask1.minutesToSeconds("1000:10"));
     }
 
-    @Test
-    void minutesToSecondsWithIncorrectParams() {
+    @Test void minutesToSecondsWithIncorrectParams() {
 
-        String testString1 = "";
-        Assertions.assertEquals(-1, testTask1.minutesToSeconds(testString1));
+        Assertions.assertEquals(-1, testTask1.minutesToSeconds(""));
 
-        String testString2 = "a";
-        Assertions.assertEquals(-1, testTask1.minutesToSeconds(testString2));
+        Assertions.assertEquals(-1, testTask1.minutesToSeconds("a"));
 
-        String testString3 = "1:60";
-        Assertions.assertEquals(-1, testTask1.minutesToSeconds(testString3));
+        Assertions.assertEquals(-1, testTask1.minutesToSeconds("1:60"));
 
-        String testString4 = ":10";
-        Assertions.assertEquals(-1, testTask1.minutesToSeconds(testString4));
+        Assertions.assertEquals(-1, testTask1.minutesToSeconds(":10"));
 
-        String testString5 = "0";
-        Assertions.assertEquals(-1, testTask1.minutesToSeconds(testString5));
+        Assertions.assertEquals(-1, testTask1.minutesToSeconds("0"));
+    }
+
+    @Test void minutesToSecondsExceptions() {
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            testTask1.minutesToSeconds(null);
+        });
     }
 }

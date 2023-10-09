@@ -1,21 +1,6 @@
 package edu.hw1;
 
 public class Task7 {
-    /**
-     * counts the amount of digits in a binary way
-     *
-     * @param inputNumber the input number
-     * @return the amount of digits
-     */
-    private int countDigitsInBinary(int inputNumber) {
-        int number = inputNumber;
-        int result = 0;
-        while (number != 0) {
-            result++;
-            number >>= 1;
-        }
-        return result;
-    }
 
     /**
      * returns a cyclic shift of a number to the left
@@ -45,5 +30,21 @@ public class Task7 {
         }
         int size = countDigitsInBinary(n);
         return ((n >> shift) | (n << (size - shift))) & ((0b1 << size) - 1);
+    }
+
+    /**
+     * counts the amount of digits in a binary way
+     *
+     * @param inputNumber the input number
+     * @return the amount of digits
+     */
+    private int countDigitsInBinary(int inputNumber) {
+        int number = inputNumber;
+        int result = 0;
+        while (number != 0) {
+            result++;
+            number >>= 1;
+        }
+        return result;
     }
 }

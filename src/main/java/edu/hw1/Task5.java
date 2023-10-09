@@ -1,8 +1,25 @@
 package edu.hw1;
 
+import static edu.hw1.Task2.BASE;
+
 public class Task5 {
 
-    public static final int BASE = 10;
+    /**
+     * checks that a string is descendant palindrome
+     *
+     * @param number the checked number
+     * @return true if descendant palindrome and false if not
+     */
+    public boolean isPalindromeDescendant(int number) {
+        StringBuilder numberStr = new StringBuilder(String.valueOf(Math.abs(number)));
+        do {
+            if (isPalindrome(numberStr)) {
+                return true;
+            }
+            numberStr = getChildOfNumber(numberStr);
+        } while (numberStr != null && numberStr.length() > 1);
+        return false;
+    }
 
     /**
      * checks that a string is a palindrome
@@ -31,22 +48,5 @@ public class Task5 {
             number /= (BASE * BASE);
         }
         return children;
-    }
-
-    /**
-     * checks that a string is descendant palindrome
-     *
-     * @param number the checked number
-     * @return true if descendant palindrome and false if not
-     */
-    public boolean isPalindromeDescendant(int number) {
-        StringBuilder numberStr = new StringBuilder(String.valueOf(Math.abs(number)));
-        do {
-            if (isPalindrome(numberStr)) {
-                return true;
-            }
-            numberStr = getChildOfNumber(numberStr);
-        } while (numberStr != null && numberStr.length() > 1);
-        return false;
     }
 }
