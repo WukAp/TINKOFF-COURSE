@@ -54,7 +54,8 @@ public class Rectangle {
         return height;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
@@ -65,11 +66,13 @@ public class Rectangle {
         return width == rectangle.width && height == rectangle.height;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "Rectangle{" + "width=" + width + ", height=" + height + '}';
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(width, height);
     }
 }

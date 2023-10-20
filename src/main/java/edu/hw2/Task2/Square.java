@@ -14,7 +14,8 @@ public class Square extends Rectangle {
         return new Square(side);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "Square{" + "side=" + super.getWidth() + '}';
     }
 

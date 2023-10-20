@@ -18,7 +18,8 @@ public sealed interface Expr {
             this(constant.evaluate());
         }
 
-        @Override public double evaluate() {
+        @Override
+        public double evaluate() {
             return value;
         }
     }
@@ -33,7 +34,8 @@ public sealed interface Expr {
             this(constant.evaluate());
         }
 
-        @Override public double evaluate() {
+        @Override
+        public double evaluate() {
             return -value;
         }
     }
@@ -57,7 +59,8 @@ public sealed interface Expr {
             this(baseConstant.evaluate(), exponent);
         }
 
-        @Override public double evaluate() {
+        @Override
+        public double evaluate() {
             return Math.pow(base, exponent);
         }
     }
@@ -81,7 +84,8 @@ public sealed interface Expr {
             this(constant1.evaluate(), value2);
         }
 
-        @Override public double evaluate() {
+        @Override
+        public double evaluate() {
             return value1 + value2;
         }
     }
@@ -105,7 +109,8 @@ public sealed interface Expr {
             this(constant1.evaluate(), value2);
         }
 
-        @Override public double evaluate() {
+        @Override
+        public double evaluate() {
             return value1 * value2;
         }
     }

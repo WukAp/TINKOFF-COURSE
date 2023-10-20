@@ -1,21 +1,24 @@
-package edu.hw2.Task3;
+package edu.hw2.Task3.ConnectionHendlers;
 
+import edu.hw2.Task3.ConnectionException;
 import edu.hw2.Task3.Connections.Connection;
 
 public class RetryConnectionHandler {
+    private final int maxAttempts;
+
     /**
      * Hided Utility Class constructor
      */
-    private RetryConnectionHandler() {
+    public RetryConnectionHandler(int maxAttempts) {
+        this.maxAttempts = maxAttempts;
     }
 
     /**
      * tries execute() maxAttempts times
      *
-     * @param task        the task to try the retried executions
-     * @param maxAttempts the number of max retries
+     * @param task the task to try the retried executions
      */
-    public static void retryConnectionWithMaxRetries(TaskConnection task, int maxAttempts) {
+    public void retryConnectionWithMaxRetries(TaskConnection task) {
         for (int i = 0; i <= maxAttempts; i++) {
             try (Connection connection = task.getConnection()) {
                 task.execute();
