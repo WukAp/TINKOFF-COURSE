@@ -2,8 +2,22 @@ package edu.hw2.Task2;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class SquareTest {
+    static Arguments[] rectangles() {
+        return new Arguments[] {Arguments.of(new Rectangle(5, 10)), Arguments.of(new Square(10))};
+    }
+
+    @ParameterizedTest @MethodSource("rectangles") void testExampleFromTask(Rectangle rect) {
+        rect = rect.setWidth(20);
+        rect = rect.setHeight(10);
+
+        assertThat(rect.area()).isEqualTo(200.0);
+    }
 
     @Test void setSide() {
         Square square = new Square(1);
@@ -39,5 +53,10 @@ class SquareTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> square.setSide(-5));
         Assertions.assertThrows(IllegalArgumentException.class, () -> square.setSide(0));
     }
-
+    @Test
+    void testToString() {
+        Assertions.assertEquals("Square{side=15}", new Square(15).toString());
+        Assertions.assertEquals("Square{side=10}", new Square(10).toString());
+        Assertions.assertEquals("Square{side=3}", new Square(3).toString());
+    }
 }

@@ -1,7 +1,6 @@
 package edu.hw2.Task3.Connections;
 
 import edu.hw2.Task3.ConnectionException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,7 +23,6 @@ class StableConnectionTest {
                 throw new RuntimeException(e);
             }
         }
-        Assertions.assertTrue(successfulAttempt > 0);
         assertEquals(0, failedAttempt);
         assertEquals(experience, successfulAttempt);
         assertEquals(experience, attempt);

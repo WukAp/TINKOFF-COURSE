@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 class PopularCommandExecutorTest {
 
-    @Test void updatePackages() {
-    }
 
     @Test void tryExecuteDefaultConnectionManageException() {
         final int experience = 10000;

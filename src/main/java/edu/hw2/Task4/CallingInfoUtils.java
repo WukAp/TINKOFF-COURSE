@@ -10,7 +10,6 @@ public class CallingInfoUtils {
     private CallingInfoUtils() {
     }
 
-
     /**
      * gets its caller info
      *
@@ -18,12 +17,7 @@ public class CallingInfoUtils {
      */
     public static CallingInfo getCallerClassAndMethodName() {
         StackTraceElement[] stack = new Throwable().getStackTrace();
-        if (stack.length > CALLER_METHOD_DEPTH) {
-            return new CallingInfo(stack[CALLER_METHOD_DEPTH].getClassName(),
-                stack[CALLER_METHOD_DEPTH].getMethodName()
-            );
-        }
-        return null;
+        return new CallingInfo(stack[CALLER_METHOD_DEPTH].getClassName(), stack[CALLER_METHOD_DEPTH].getMethodName());
     }
 
     public record CallingInfo(String className, String methodName) {

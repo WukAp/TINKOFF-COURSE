@@ -7,14 +7,15 @@ import java.util.Random;
 
 public class DefaultConnectionManager implements ConnectionManager {
     private final Random random = new Random();
+    public static final double PROBABILITY_OF_STABLE = 0.7;
 
     /**
-     * chooses the FaultyConnection or the StableConnection by 0.5 random
+     * chooses the FaultyConnection or the StableConnection by random
      *
      * @return the FaultyConnection or the StableConnection
      */
     @Override public Connection getConnection() {
-        if (random.nextBoolean()) {
+        if (random.nextDouble() > PROBABILITY_OF_STABLE) {
             return new FaultyConnection();
         } else {
             return new StableConnection();

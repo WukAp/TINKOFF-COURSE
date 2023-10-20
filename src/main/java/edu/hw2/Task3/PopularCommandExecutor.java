@@ -23,20 +23,14 @@ public final class PopularCommandExecutor {
      * @param command the instructions to be executed on the system
      */
     public void tryExecute(String command) {
-        int currentAAttempt = 0;
-        boolean isExecuted = false;
-        while (!isExecuted && currentAAttempt < maxAttempts) {
-            try (Connection connection = manager.getConnection()) {
-                currentAAttempt++;
-                connection.execute(command);
-                isExecuted = true;
-            } catch (ConnectionException e) {
-                if (currentAAttempt == maxAttempts) {
-                    throw new ConnectionException("exceeded the maximum number of unsuccessful attempts", e.getCause());
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+        RetryConnectionHandler.retryConnectionWithMaxRetries(new RetryConnectionHandler.TaskConnection() {
+            @Override public void execute() {
+                getConnection().execute(command);
             }
-        }
+
+            @Override public Connection getConnection() {
+                return manager.getConnection();
+            }
+        }, maxAttempts);
     }
 }

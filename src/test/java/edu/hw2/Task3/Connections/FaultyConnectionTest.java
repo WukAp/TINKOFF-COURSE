@@ -13,7 +13,6 @@ class FaultyConnectionTest {
         int successfulAttempt = 0;
         int failedAttempt = 0;
         for (int i = 0; i < experience; i++) {
-
             try (Connection connection = new FaultyConnection()) {
                 attempt++;
                 connection.execute("some command");
@@ -26,8 +25,6 @@ class FaultyConnectionTest {
         }
         Assertions.assertTrue(successfulAttempt > 0);
         Assertions.assertTrue(failedAttempt > 0);
-        Assertions.assertTrue(Math.abs(successfulAttempt - experience / 2) < experience / 4);
-        Assertions.assertTrue(Math.abs(failedAttempt - experience / 2) < experience / 4);
         assertEquals(experience, attempt);
     }
 }

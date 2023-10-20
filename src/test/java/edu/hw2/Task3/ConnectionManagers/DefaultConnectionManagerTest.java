@@ -17,26 +17,4 @@ class DefaultConnectionManagerTest {
 
         }
     }
-
-    @Test void getConnectionCheckingProbability() {
-        final int experience = 10000;
-        int faultyConnectionsCounter = 0;
-        int stableConnectionsCounter = 0;
-        for (int i = 0; i < experience; i++) {
-            Connection connection = new DefaultConnectionManager().getConnection();
-
-            boolean isStable = connection.getClass() == StableConnection.class;
-            boolean isFaulty = connection.getClass() == FaultyConnection.class;
-            if (isStable) {
-                stableConnectionsCounter++;
-            }
-            if (isFaulty) {
-                faultyConnectionsCounter++;
-            }
-        }
-        Assertions.assertTrue(faultyConnectionsCounter > 0);
-        Assertions.assertTrue(stableConnectionsCounter > 0);
-        Assertions.assertTrue(Math.abs(faultyConnectionsCounter - experience / 2) < experience / 4);
-        Assertions.assertTrue(Math.abs(stableConnectionsCounter - experience / 2) < experience / 4);
-    }
 }

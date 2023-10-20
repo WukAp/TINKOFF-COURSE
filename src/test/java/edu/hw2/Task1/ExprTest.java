@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 class ExprTest {
 
     @Test
-    void evaluate() {
-        var two = new Constant.Constant(2);
+    void testExampleFromTask() {
+        var two = new Constant(2);
         var four = new Constant(4);
         var negOne = new Negate(new Constant(1));
         var sumTwoFour = new Addition(two, four);
@@ -27,5 +27,22 @@ class ExprTest {
         Assertions.assertEquals(-6, mult.evaluate());
         Assertions.assertEquals(36, exp.evaluate());
         Assertions.assertEquals(37, res.evaluate());
+    }
+
+    @Test
+    void evaluate() {
+        var twoConstant = new Constant(2);
+
+        Assertions.assertEquals(new Constant(2), new Constant(twoConstant));
+        Assertions.assertEquals(new Negate(2), new Negate(twoConstant));
+        Assertions.assertEquals(new Addition(2, 2), new Addition(twoConstant, twoConstant));
+        Assertions.assertEquals(new Addition(2, 2), new Addition(2, twoConstant));
+        Assertions.assertEquals(new Addition(2, 2), new Addition(twoConstant, 2));
+        Assertions.assertEquals(new Exponent(2, 2), new Exponent(twoConstant, twoConstant));
+        Assertions.assertEquals(new Exponent(2, 2), new Exponent(2, twoConstant));
+        Assertions.assertEquals(new Exponent(2, 2), new Exponent(twoConstant, 2));
+        Assertions.assertEquals(new Multiplication(2, 2), new Multiplication(twoConstant, twoConstant));
+        Assertions.assertEquals(new Multiplication(2, 2), new Multiplication(2, twoConstant));
+        Assertions.assertEquals(new Multiplication(2, 2), new Multiplication(twoConstant, 2));
     }
 }
