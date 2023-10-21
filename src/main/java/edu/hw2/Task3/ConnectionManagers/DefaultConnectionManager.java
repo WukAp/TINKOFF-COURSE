@@ -18,7 +18,6 @@ public class DefaultConnectionManager implements ConnectionManager {
 
     public DefaultConnectionManager() {
         this.joker = new Joker(DEFAULT_PROBABILITY_OF_EXCEPTION);
-        ;
     }
 
     /**
