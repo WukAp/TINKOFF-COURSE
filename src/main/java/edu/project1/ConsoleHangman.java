@@ -52,6 +52,6 @@ public class ConsoleHangman {
                 return null;
             }
         } while (!inputString.matches("[a-zA-Zа-яА-Я]"));
-        return inputString.charAt(0);
+        return inputString.toLowerCase().charAt(0);
     }
 }
