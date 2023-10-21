@@ -12,13 +12,14 @@ public class Session {
     private final int maxAttempts;
     private int attempts;
     private int amountOfGuessed;
+    private final char unknownLetter = '*';
 
     public Session(String answer, int maxAttempts) {
         validate(answer, maxAttempts);
         this.answer = answer.toLowerCase();
         this.state = new char[answer.length()];
         for (int i = 0; i < answer.length(); i++) {
-            state[i] = '*';
+            state[i] = unknownLetter;
         }
         this.maxAttempts = maxAttempts;
         amountOfGuessed = 0;
@@ -50,6 +51,7 @@ public class Session {
 
     /**
      * ends the game at the user's request
+     *
      * @return Defeat GameResult
      */
     @NotNull GuessResult giveUp() {

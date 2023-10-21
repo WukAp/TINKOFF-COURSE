@@ -8,7 +8,7 @@ public class ConsoleHangman {
     private static final Scanner SCANNER = new Scanner(System.in);
     private final static Logger LOGGER = LogManager.getLogger();
     private final int maxAttempt;
-    public static final String EXIT_COMMAND = "";
+    public static final String EXIT_COMMAND = "exit";
 
     public ConsoleHangman(Dictionary dictionary, int maxAttempt) {
         this.maxAttempt = maxAttempt;
@@ -24,14 +24,12 @@ public class ConsoleHangman {
     public void run() {
         LOGGER.info("Welcome to Console Hangman");
         Session session = new Session(dictionary.randomWord(), maxAttempt);
-        boolean isGameOver = false;
-        while (!isGameOver) {
+        GuessResult guessResult;
+        do {
             Character letter = getGuessLetter();
-
-            GuessResult guessResult = tryGuess(session, letter);
-            isGameOver = guessResult.isGameOver();
+            guessResult = tryGuess(session, letter);
             printState(guessResult);
-        }
+        } while (guessResult.isGameOver());
     }
 
     private GuessResult tryGuess(Session session, Character input) {
