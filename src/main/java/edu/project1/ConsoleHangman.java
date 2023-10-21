@@ -29,7 +29,7 @@ public class ConsoleHangman {
             Character letter = getGuessLetter();
             guessResult = tryGuess(session, letter);
             printState(guessResult);
-        } while (guessResult.isGameOver());
+        } while (!guessResult.isGameOver());
     }
 
     private GuessResult tryGuess(Session session, Character input) {
