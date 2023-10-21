@@ -9,10 +9,16 @@ import org.junit.jupiter.api.Test;
 
 class DefaultConnectionManagerTest {
 
-    @Test void getConnectionCheckingClasses() {
+    @Test void getConnection() {
         Connection connectionFail = new DefaultConnectionManager(new Joker(1)).getConnection();
         Connection connectionSuccess = new DefaultConnectionManager(new Joker(0)).getConnection();
         Assertions.assertEquals(FaultyConnection.class, connectionFail.getClass());
         Assertions.assertEquals(StableConnection.class, connectionSuccess.getClass());
+    }
+
+    @Test void getConnectionCheckingClasses() {
+        Connection connectionFail = new DefaultConnectionManager().getConnection();
+        Assertions.assertTrue(
+            StableConnection.class == connectionFail.getClass() || FaultyConnection.class == connectionFail.getClass());
     }
 }
