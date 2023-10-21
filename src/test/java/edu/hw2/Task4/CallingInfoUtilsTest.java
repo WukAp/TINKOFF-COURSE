@@ -13,7 +13,9 @@ class CallingInfoUtilsTest {
     }
 
     @Test void getCallerClassAndMethodNameAnother() {
-        Assertions.assertEquals(new CallingInfoUtils.CallingInfo("edu.hw2.Task4.CallingInfoUtilsTest",
+        Assertions.assertEquals(
+            new CallingInfoUtils.CallingInfo(
+                "edu.hw2.Task4.CallingInfoUtilsTest",
                 "getCallerClassAndMethodNameAnother"
             ),
             CallingInfoUtils.getCallerClassAndMethodName()

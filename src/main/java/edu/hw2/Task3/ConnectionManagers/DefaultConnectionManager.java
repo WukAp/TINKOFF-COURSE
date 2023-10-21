@@ -6,8 +6,20 @@ import edu.hw2.Task3.Connections.StableConnection;
 import edu.hw2.Task3.Random.Joker;
 
 public class DefaultConnectionManager implements ConnectionManager {
-    public static final double PROBABILITY_OF_EXCEPTION = 0.3;
-    private static final Joker JOKER = new Joker(PROBABILITY_OF_EXCEPTION);
+    public static final double DEFAULT_PROBABILITY_OF_EXCEPTION = 0.3;
+    private final Connection faultyConnection = new FaultyConnection();
+    private final Connection stableConnection = new StableConnection();
+
+    private final Joker joker;
+
+    public DefaultConnectionManager(Joker joker) {
+        this.joker = joker;
+    }
+
+    public DefaultConnectionManager() {
+        this.joker = new Joker(DEFAULT_PROBABILITY_OF_EXCEPTION);
+        ;
+    }
 
     /**
      * chooses the FaultyConnection or the StableConnection by joker.shouldItFail()
@@ -16,10 +28,10 @@ public class DefaultConnectionManager implements ConnectionManager {
      */
     @Override
     public Connection getConnection() {
-        if (JOKER.shouldItFail()) {
-            return new FaultyConnection();
+        if (joker.shouldItFail()) {
+            return faultyConnection;
         } else {
-            return new StableConnection();
+            return stableConnection;
         }
     }
 }

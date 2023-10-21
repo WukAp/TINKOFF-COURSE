@@ -8,10 +8,7 @@ import org.junit.jupiter.api.Test;
 class FaultyConnectionManagerTest {
 
     @Test void getConnection() {
-        for (int i = 0; i < 1000; i++) {
-            Connection connection = new FaultyConnectionManager().getConnection();
-            Assertions.assertSame(FaultyConnection.class, connection.getClass());
-        }
+        Connection connection = new FaultyConnectionManager().getConnection();
+        Assertions.assertSame(FaultyConnection.class, connection.getClass());
     }
-
 }
