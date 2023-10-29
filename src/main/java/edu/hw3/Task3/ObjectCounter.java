@@ -10,10 +10,10 @@ public class ObjectCounter<T> {
     /**
      * gets frequency list of object
      *
-     * @param objets the not null list with objects to count
+     * @param objects the not null list with objects to count
      * @return the frequency list
      */
-    public Map<T, Integer> freqDict(@NotNull Collection<T> objets) {
-        return objets.stream().collect(Collectors.toMap(key -> key, val -> 1, Integer::sum));
+    public Map<T, Integer> freqDict(@NotNull Collection<T> objects) {
+        return objects.stream().collect(Collectors.toMap(key -> key, val -> 1, Integer::sum));
     }
 }

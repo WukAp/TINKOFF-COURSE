@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class StockMarketWithPriorityQueue implements StockMarket {
-    private final Comparator<Stock> compareByPrice = (o1, o2) -> -Float.compare(o1.getPrice(), o2.getPrice());
+    private final Comparator<Stock> compareByPrice = (o1, o2) -> -Integer.compare(o1.price(), o2.price());
     private final Queue<Stock> stockQueue = new PriorityQueue<>(compareByPrice);
 
     /**
