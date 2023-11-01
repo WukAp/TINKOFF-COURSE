@@ -15,16 +15,19 @@ import org.jetbrains.annotations.NotNull;
 public class AnimalUtils {
 
     public List<Animal> getSortedByHeight(@NotNull List<Animal> animalList) {
+        validateNotNull(animalList);
         return animalList.stream().sorted(Comparator.comparingInt(Animal::height)).toList();
     }
 
     public List<Animal> getTheHeaviestAnimalsLimited(@NotNull List<Animal> animalList, int listSizeLimit) {
+        validateNotNull(animalList);
         return animalList.stream().sorted((animal1, animal2) -> -Integer.compare(animal1.weight(), animal2.weight()))
             .limit(listSizeLimit)
             .toList();
     }
 
     public Map<Animal.Type, Long> getFrequencyListOfAnimals(@NotNull List<Animal> animalList) {
+        validateNotNull(animalList);
         return animalList.stream().collect(Collectors.groupingBy(Animal::type, Collectors.counting()));
     }
 
@@ -40,6 +43,7 @@ public class AnimalUtils {
     }
 
     public Map<Animal.Type, Animal> getTheHeaviestAnimalOfTypes(@NotNull List<Animal> animalList) {
+        validateNotNull(animalList);
         return animalList.stream()
             .collect(Collectors.toMap(
                 Animal::type,
@@ -56,33 +60,39 @@ public class AnimalUtils {
     }
 
     public Optional<Animal> getTheHeaviestFromAnimalsShorterThenK(@NotNull List<Animal> animalList, int k) {
+        validateNotNull(animalList);
         return animalList.stream().filter(animal -> animal.height() < k).max(Comparator.comparingInt(Animal::weight));
     }
 
     public int getSumOfPaws(@NotNull List<Animal> animalList) {
-
+        validateNotNull(animalList);
         return animalList.stream().reduce(0, (paws, animal) -> paws + animal.paws(), Integer::sum);
     }
 
     public List<Animal> getAnimalsWithPawsAmountNotEqualsAge(@NotNull List<Animal> animalList) {
+        validateNotNull(animalList);
 
         return animalList.stream().filter(animal -> animal.paws() != animal.age()).toList();
     }
 
     public List<Animal> getBitingAnimalsTallerThan100(@NotNull List<Animal> animalList) {
+        validateNotNull(animalList);
         final int infimumHeight = 100;
         return animalList.stream().filter(animal -> animal.height() > infimumHeight && animal.bites()).toList();
     }
 
     public long getAnimalsWithWeightMoreThenHeight(@NotNull List<Animal> animalList) {
+        validateNotNull(animalList);
         return animalList.stream().filter(animal -> animal.weight() > animal.height()).count();
     }
 
     public List<Animal> getAnimalsWithNameOfMoreThenOneWord(@NotNull List<Animal> animalList) {
+        validateNotNull(animalList);
         return animalList.stream().filter(animal -> animal.name().contains(" ")).toList();
     }
 
     public boolean containsDogHigherThenInfimumHeight(@NotNull List<Animal> animalList, int infimumHeight) {
+        validateNotNull(animalList);
         return animalList.stream()
             .anyMatch((animal) -> animal.type() == Animal.Type.DOG && animal.height() > infimumHeight);
     }
@@ -92,11 +102,13 @@ public class AnimalUtils {
         int minAge,
         int maxAge
     ) {
+        validateNotNull(animalList);
         return animalList.stream().filter((animal) -> animal.age() >= minAge && animal.age() <= maxAge)
             .collect(Collectors.toMap(Animal::type, Animal::weight, Integer::sum));
     }
 
     public List<Animal> getSortedByTypeThenSexThenName(@NotNull List<Animal> animalList) {
+        validateNotNull(animalList);
         return animalList.stream().sorted((animal1, animal2) -> {
             if (!animal1.type().equals(animal2.type())) {
                 return animal1.type().compareTo(animal2.type());
@@ -133,7 +145,7 @@ public class AnimalUtils {
     }
 
     private void validateNotNull(List<Animal> animalList) {
-        if (animalList.isEmpty()) {
+        if (animalList==null) {
             throw new IllegalArgumentException("input list shouldn't be empty");
         }
     }

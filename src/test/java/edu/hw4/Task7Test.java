@@ -3,6 +3,7 @@ package edu.hw4;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.List;
+import java.util.NoSuchElementException;
 import static edu.hw4.AnimalBuilder.createAnimalByAge;
 import static edu.hw4.AnimalBuilder.createAnimalByName;
 
@@ -23,7 +24,7 @@ public class Task7Test {
 
     @Test
     void getKthOldestAnimalExceptions() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> animalUtils.getKthOldestAnimal(List.of(), 3));
+        Assertions.assertThrows(NoSuchElementException.class, () -> animalUtils.getKthOldestAnimal(List.of(), 3));
         Assertions.assertThrows(IllegalArgumentException.class, () -> animalUtils.getKthOldestAnimal(null, 3));
     }
 }

@@ -3,6 +3,7 @@ package edu.hw4;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.List;
+import java.util.NoSuchElementException;
 import static edu.hw4.AnimalBuilder.createAnimalByName;
 
 public class Task4Test {
@@ -22,7 +23,7 @@ public class Task4Test {
     @Test
     void getTheLongestAnimalNameExceptions() {
         Assertions.assertThrows(
-            IllegalArgumentException.class,
+            NoSuchElementException.class,
             () -> animalUtils.getAnimalWithTheLongestName(List.of())
         );
         Assertions.assertThrows(IllegalArgumentException.class, () -> animalUtils.getAnimalWithTheLongestName(null));
