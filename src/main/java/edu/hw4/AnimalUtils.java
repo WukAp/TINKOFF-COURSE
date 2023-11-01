@@ -145,7 +145,7 @@ public class AnimalUtils {
     }
 
     private void validateNotNull(List<Animal> animalList) {
-        if (animalList==null) {
+        if (animalList == null) {
             throw new IllegalArgumentException("input list shouldn't be empty");
         }
     }
