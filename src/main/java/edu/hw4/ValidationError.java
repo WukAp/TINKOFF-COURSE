@@ -3,10 +3,6 @@ package edu.hw4;
 public sealed abstract class ValidationError extends Exception {
     public abstract String getProblemField();
 
-    @Override public String toString() {
-        return getProblemField();
-    }
-
     public static final class IllegalAgeArgumentException extends ValidationError {
         @Override
         public String getProblemField() {
