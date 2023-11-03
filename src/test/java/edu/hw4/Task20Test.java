@@ -18,21 +18,21 @@ public class Task20Test {
             new Animal("Pelmen", CAT, null, 20, 170, -50, false),
             new Animal("Fed", CAT, F, 20, -170, 50, false)
         ));
-        Assertions.assertEquals(3, prettyPrintIncorrectAnimals.size());
 
-        Assertions.assertEquals("[sex, weight]".length(), prettyPrintIncorrectAnimals.get("Pelmen").length());
+        Assertions.assertEquals(3, prettyPrintIncorrectAnimals.size());
+        Assertions.assertTrue(prettyPrintIncorrectAnimals.get("Pelmen").matches("(.*)\\n(.*)\\n"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get("Pelmen").contains("sex"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get("Pelmen").contains("weight"));
 
-        Assertions.assertEquals("[height]".length(), prettyPrintIncorrectAnimals.get("Fed").length());
+        Assertions.assertTrue(prettyPrintIncorrectAnimals.get("Fed").matches("(.*)\\n"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get("Fed").contains("height"));
 
-        Assertions.assertEquals("[name, type, age, height]".length(), prettyPrintIncorrectAnimals.get(null).length());
+        Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).matches("(.*)\\n(.*)\\n(.*)\\n(.*)\\n"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).contains("name"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).contains("type"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).contains("age"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).contains("height"));
-
+        Assertions.assertFalse(prettyPrintIncorrectAnimals.get(null).contains("weight"));
         Assertions.assertNull(prettyPrintIncorrectAnimals.get("Sasha"));
 
         Assertions.assertTrue(animalUtils.getPrettyPrintIncorrectAnimals(List.of()).isEmpty());
