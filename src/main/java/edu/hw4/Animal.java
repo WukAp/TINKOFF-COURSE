@@ -28,7 +28,6 @@ public record Animal(
         M, F
     }
 
-    @SuppressWarnings("MagicNumber")
     public int paws() {
         return type.getPaws();
     }
