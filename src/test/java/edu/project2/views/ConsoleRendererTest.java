@@ -20,7 +20,7 @@ class ConsoleRendererTest {
             {WALL, PASSAGE, PASSAGE, PASSAGE},
             {WALL, WALL, WALL, WALL}
         });
-        Assertions.assertEquals("□□■■\n■□□□\n■□□□\n■■■■\n", consoleRenderer.render(maze));
+        Assertions.assertEquals("  ▆▆\n▆   \n▆   \n▆▆▆▆\n", consoleRenderer.render(maze));
     }
 
     @Test
@@ -36,6 +36,6 @@ class ConsoleRendererTest {
             new Coordinate(1, 1), new Coordinate(2, 1),
             new Coordinate(2, 2), new Coordinate(2, 3)
         );
-        Assertions.assertEquals("☺·■■\n■·□□\n■··⚑\n■■■■\n", consoleRenderer.render(maze, path));
+        Assertions.assertEquals("☺·▆▆\n▆·  \n▆··⚑\n▆▆▆▆\n", consoleRenderer.render(maze, path));
     }
 }
