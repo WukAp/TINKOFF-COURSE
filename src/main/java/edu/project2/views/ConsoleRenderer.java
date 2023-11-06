@@ -11,7 +11,7 @@ public class ConsoleRenderer implements Renderer {
 
         for (int i = 0; i < maze.height(); i++) {
             for (int j = 0; j < maze.width(); j++) {
-                renderedMaze.append(getCellViewByCell(maze.grid()[i][j]));
+                renderedMaze.append(getCellViewByCell(maze.grid()[i][j]).getView());
             }
             renderedMaze.append("\n");
         }
@@ -36,9 +36,9 @@ public class ConsoleRenderer implements Renderer {
         StringBuilder renderedMaze = new StringBuilder();
         for (int i = 0; i < maze.height(); i++) {
             for (int j = 0; j < maze.width(); j++) {
-                renderedMaze.append(gridView[i][j]);
+                renderedMaze.append(gridView[i][j].getView());
             }
-            renderedMaze.append("\n");
+            renderedMaze.append(System.lineSeparator());
         }
         return String.valueOf(renderedMaze);
     }
@@ -51,8 +51,7 @@ public class ConsoleRenderer implements Renderer {
             this.view = view;
         }
 
-        @Override
-        public String toString() {
+        public String getView() {
             return String.valueOf(view);
         }
     }

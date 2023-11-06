@@ -14,7 +14,6 @@ public class BacktrackingSolver implements Solver {
 
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
-
         this.height = maze.height();
         this.width = maze.width();
         this.grid = maze.grid();
@@ -28,6 +27,14 @@ public class BacktrackingSolver implements Solver {
         return null;
     }
 
+    /**
+     * solve maze using backtracking
+     *
+     * @param start           the start of the path
+     * @param end             the end of the path
+     * @param parentDirection the direction of the previous cell
+     * @return true if finish was achieved
+     */
     private boolean backtracking(Coordinate start, Coordinate end, Direction parentDirection) {
         if (start.equals(end)) {
             addInResult(start);
