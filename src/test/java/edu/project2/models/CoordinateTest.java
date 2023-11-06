@@ -25,4 +25,21 @@ class CoordinateTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Coordinate(-10, -20));
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Coordinate(-10, -20));
     }
+
+    @Test
+    void testEquals() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        assertEquals(coordinate, coordinate);
+        assertEquals(new Coordinate(1, 1), new Coordinate(1, 1));
+        assertNotEquals(new Coordinate(1, 1), new Coordinate(1, 2));
+        assertNotEquals(new Coordinate(1, 1), new Object());
+        assertNotEquals(new Coordinate(1, 1), null);
+    }
+
+    @Test
+    void testHashCode() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        assertEquals(coordinate.hashCode(), coordinate.hashCode());
+        assertEquals(new Coordinate(1, 1).hashCode(), new Coordinate(1, 1).hashCode());
+    }
 }
