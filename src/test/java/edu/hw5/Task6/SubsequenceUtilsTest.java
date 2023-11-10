@@ -1,35 +1,38 @@
 package edu.hw5.Task6;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SubsequenceUtilsTest {
     private final SubsequenceUtils substringUtils = new SubsequenceUtils();
 
     @Test
     void isSubsequence() {
-        Assertions.assertTrue(substringUtils.isSubstring(new String[] {"a", "b", "c"}, "achfdbaabgabcaabg"));
-        Assertions.assertTrue(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "boba"));
-        Assertions.assertTrue(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "bob"));
-        Assertions.assertTrue(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "abob"));
-        Assertions.assertTrue(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "aboba"));
-        Assertions.assertFalse(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "bbo"));
-        Assertions.assertFalse(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "aaaa"));
-        Assertions.assertFalse(substringUtils.isSubstring(new String[] {"b", "o", "b", "a"}, "bob"));
+        assertTrue(substringUtils.isSubstring(new String[] {"a", "b", "c"}, "achfdbaabgabcaabg"));
+        assertTrue(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "boba"));
+        assertTrue(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "bob"));
+        assertTrue(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "abob"));
+        assertTrue(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "aboba"));
+        assertFalse(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "bbo"));
+        assertFalse(substringUtils.isSubstring(new String[] {"b", "o", "b"}, "aaaa"));
+        assertFalse(substringUtils.isSubstring(new String[] {"b", "o", "b", "a"}, "bob"));
     }
 
     @Test
     void exceptions() {
-        Assertions.assertThrows(
+        assertThrows(
             IllegalArgumentException.class,
             () -> substringUtils.isSubstring(new String[] {}, "aboba")
         );
-        Assertions.assertThrows(
+        assertThrows(
             IllegalArgumentException.class,
             () -> substringUtils.isSubstring(new String[] {"sa"}, "")
         );
-        Assertions.assertThrows(IllegalArgumentException.class, () -> substringUtils.isSubstring(null, "aboba"));
-        Assertions.assertThrows(
+        assertThrows(IllegalArgumentException.class, () -> substringUtils.isSubstring(null, "aboba"));
+        assertThrows(
             IllegalArgumentException.class,
             () -> substringUtils.isSubstring(new String[] {"sa"}, null)
         );

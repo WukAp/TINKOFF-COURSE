@@ -6,9 +6,9 @@ import java.util.function.UnaryOperator;
 
 public class RelativeWordsParser implements DateParser {
     private enum RelativeTimePointers {
-        tomorrow((date) -> date.plusDays(1)),
-        today((date) -> date),
-        yesterday((date) -> date.minusDays(1));
+        TOMORROW((date) -> date.plusDays(1)),
+        TODAY((date) -> date),
+        YESTERDAY((date) -> date.minusDays(1));
 
         RelativeTimePointers(UnaryOperator<LocalDate> moveDate) {
             this.moveDate = moveDate;
@@ -18,6 +18,10 @@ public class RelativeWordsParser implements DateParser {
             return moveDate.apply(LocalDate.now());
         }
 
+        public String getWord() {
+            return this.name().toLowerCase();
+        }
+
         private final UnaryOperator<LocalDate> moveDate;
 
     }
@@ -25,7 +29,7 @@ public class RelativeWordsParser implements DateParser {
     @Override
     public LocalDate parse(String string) {
         for (RelativeTimePointers value : RelativeTimePointers.values()) {
-            if (string.equals(value.name())) {
+            if (string.equals(value.getWord())) {
                 return value.getDate();
             }
         }
@@ -36,7 +40,7 @@ public class RelativeWordsParser implements DateParser {
     public String getRegExp() {
         return "^"
             + String.join("|", Arrays.stream(RelativeTimePointers.values())
-            .map(Enum::name)
+            .map(RelativeTimePointers::getWord)
             .toArray(String[]::new))
             + "$";
     }

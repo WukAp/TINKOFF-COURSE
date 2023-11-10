@@ -7,7 +7,7 @@ import java.time.Year;
 import java.time.temporal.ChronoField;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjusters;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WitchDay {
@@ -22,7 +22,7 @@ public class WitchDay {
      * @return the list of all WitchDay of the year
      */
     public List<LocalDate> getWitchDaysByYear(Year year) {
-        List<LocalDate> witchDays = new LinkedList<>();
+        List<LocalDate> witchDays = new ArrayList<>();
         for (int month = 1; month <= MONTH_AMOUNT; month++) {
             LocalDate witchDateInCurrentMonth = (year.atMonthDay(MonthDay.of(month, WITCH_DATE)));
             if (witchDateInCurrentMonth.getDayOfWeek() == WITCH_DAY_OF_WEEK) {
