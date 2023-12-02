@@ -1,9 +1,7 @@
 package edu.hw6.Task1;
 
-import edu.hw6.Task2.FilesUtils;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +10,17 @@ import java.util.HashMap;
 import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
-class DiskMapTest {
+public class DiskMapTest {
+    public static void deleteFileIfExists(Path path) throws IOException {
+        if (Files.exists(path)) {
+            Files.delete(path);
+        }
+    }
+
+    public static DiskMap createNewDiskMapForTest(Path path) throws IOException {
+        deleteFileIfExists(path);
+        return new DiskMap(path);
+    }
 
     @Test
     void constructor() throws IOException {
@@ -20,7 +28,7 @@ class DiskMapTest {
         Path path = Paths.get("testFiles/testFileConstructor.txt");
 
         assertDoesNotThrow(() -> new DiskMap(path));
-        assertTrue( new DiskMap(path).isEmpty());
+        assertTrue(new DiskMap(path).isEmpty());
 
         Files.delete(path);
     }
@@ -28,10 +36,7 @@ class DiskMapTest {
     @Test
     void change() throws IOException {
         Path path = Paths.get("testFiles/testFile.txt");
-        if (Files.exists(path)) {
-            Files.delete(path);
-        }
-        DiskMap diskMap = new DiskMap(path);
+        DiskMap diskMap = createNewDiskMapForTest(path);
         assertTrue(diskMap.isEmpty());
 
         diskMap.put("1", "one");
@@ -41,6 +46,7 @@ class DiskMapTest {
         diskMap.put("2", "two");
         assertFalse(diskMap.isEmpty());
         assertEquals(2, diskMap.size());
+        assertEquals("two", diskMap.get("2"));
 
         assertTrue(diskMap.containsKey("1"));
         assertFalse(diskMap.containsKey("3"));
@@ -65,4 +71,40 @@ class DiskMapTest {
         assertEquals(2, diskMap.entrySet().size());
         Files.delete(path);
     }
+
+    @Test
+    void dataMethods() throws IOException {
+        DiskMap diskMap1 = createNewDiskMapForTest(Paths.get("testFiles/testFile.txt"));
+        DiskMap diskMap2 = createNewDiskMapForTest(Paths.get("testFiles/testFile2.txt"));
+        assertTrue(diskMap1.equals(diskMap1));
+        assertEquals(diskMap1.hashCode(), diskMap1.hashCode());
+
+        assertFalse(diskMap1.equals(diskMap2));
+        assertFalse(diskMap1.equals(new Object()));
+        assertFalse(diskMap1.equals(null));
+
+    }
+
+    @Test
+    void changeThrow() throws IOException {
+        Path path = Paths.get("testFiles/testFile.txt");
+        DiskMap diskMap = createNewDiskMapForTest(path);
+        if (Files.exists(path)) {
+            Files.delete(path);
+        }
+        assertThrows(RuntimeException.class, () -> diskMap.put("2", "two"));
+        assertThrows(RuntimeException.class, diskMap::size);
+        assertThrows(RuntimeException.class, diskMap::isEmpty);
+        assertThrows(RuntimeException.class, diskMap::keySet);
+        assertThrows(RuntimeException.class, diskMap::values);
+        assertThrows(RuntimeException.class, diskMap::entrySet);
+        assertThrows(RuntimeException.class, () -> diskMap.containsKey("1"));
+        assertThrows(RuntimeException.class, () -> diskMap.containsValue("1"));
+        assertThrows(RuntimeException.class, () -> diskMap.get("1"));
+        assertThrows(RuntimeException.class, () -> diskMap.put("1", "one"));
+        assertThrows(RuntimeException.class, () -> diskMap.putAll(new HashMap<>()));
+        assertThrows(RuntimeException.class, () -> diskMap.remove("1"));
+
+    }
+
 }
