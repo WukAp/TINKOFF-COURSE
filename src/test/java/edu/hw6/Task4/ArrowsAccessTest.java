@@ -13,28 +13,12 @@ import static edu.hw6.Task1.DiskMapTest.deleteFileIfExists;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArrowsAccessTest {
-    private ArrowsAccess arrowsAccess = new ArrowsAccess();
-
-    @Test
-    void getOutputStream() {
-    }
-
-    @Test
-    void getCheckedOutputStream() {
-    }
-
-    @Test
-    void getBufferedOutputStream() {
-    }
-
-    @Test
-    void getOutputStreamWriter() {
-    }
+    private final ArrowsAccess arrowsAccess = new ArrowsAccess();
 
     @Test
     void getPrintWriter() throws IOException {
         String text = "Programming is learned by writing programs. ― Brian Kernighan";
-        Path path = Paths.get("testFiles/testFileConstructor.txt");
+        Path path = Paths.get("testFilesArrowsAccess/testFileConstructor.txt");
         deleteFileIfExists(path);
         arrowsAccess.getPrintWriter(path.toString(), text);
 
