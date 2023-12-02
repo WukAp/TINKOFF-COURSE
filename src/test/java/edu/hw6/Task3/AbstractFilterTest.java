@@ -12,16 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class AbstractFilterTest {
     public static final AbstractFilter regularFile = Files::isRegularFile;
     public static final AbstractFilter readable = Files::isReadable;
-
     @Test
     void filter() throws IOException {
-        MyFilters myFilters = new MyFilters();
+MyFilters myFilters = new MyFilters();
 
-        Path path = Paths.get("testFilesMyFilters");
+        Path path = Paths.get("testFiles");
         DirectoryStream.Filter<Path> filter = regularFile
             .and(readable)
             .and(myFilters.largerThan(100_000))
-            .and(myFilters.magicNumber((char) 0x89, 'P', 'N', 'G')
+            .and(myFilters.magicNumber((char)0x89, 'P', 'N', 'G')
                 .and(myFilters.globMatches("*.png"))
                 .and(myFilters.regexContains("[-]")).and(myFilters.hasAttribute(AccessMode.READ)));
 
@@ -35,7 +34,7 @@ class AbstractFilterTest {
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(path, filter)) {
             var iterator = entries.iterator();
             assertTrue(iterator.hasNext());
-            assertEquals("testFilesMyFilters/images.jpeg", iterator.next().toString());
+            assertEquals("testFiles/images.jpeg", iterator.next().toString());
             assertFalse(iterator.hasNext());
         }
         filter = regularFile
@@ -44,7 +43,7 @@ class AbstractFilterTest {
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(path, filter)) {
             var iterator = entries.iterator();
             assertTrue(iterator.hasNext());
-            assertEquals("testFilesMyFilters/images.jpeg", iterator.next().toString());
+            assertEquals("testFiles/images.jpeg", iterator.next().toString());
             assertFalse(iterator.hasNext());
         }
     }

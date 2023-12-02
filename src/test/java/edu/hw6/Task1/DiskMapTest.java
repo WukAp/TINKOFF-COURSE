@@ -25,7 +25,7 @@ public class DiskMapTest {
     @Test
     void constructor() throws IOException {
 
-        Path path = Paths.get("testFilesDiskMap/testFileConstructor.txt");
+        Path path = Paths.get("testFiles/testFileConstructor.txt");
 
         assertDoesNotThrow(() -> new DiskMap(path));
         assertTrue(new DiskMap(path).isEmpty());
@@ -35,7 +35,7 @@ public class DiskMapTest {
 
     @Test
     void change() throws IOException {
-        Path path = Paths.get("testFilesDiskMap/testFile.txt");
+        Path path = Paths.get("testFiles/testFile.txt");
         DiskMap diskMap = createNewDiskMapForTest(path);
         assertTrue(diskMap.isEmpty());
 
@@ -74,8 +74,8 @@ public class DiskMapTest {
 
     @Test
     void dataMethods() throws IOException {
-        DiskMap diskMap1 = createNewDiskMapForTest(Paths.get("testFilesDiskMap/testFile.txt"));
-        DiskMap diskMap2 = createNewDiskMapForTest(Paths.get("testFilesDiskMap/testFile2.txt"));
+        DiskMap diskMap1 = createNewDiskMapForTest(Paths.get("testFiles/testFile.txt"));
+        DiskMap diskMap2 = createNewDiskMapForTest(Paths.get("testFiles/testFile2.txt"));
         assertTrue(diskMap1.equals(diskMap1));
         assertEquals(diskMap1.hashCode(), diskMap1.hashCode());
 
@@ -83,11 +83,15 @@ public class DiskMapTest {
         assertFalse(diskMap1.equals(new Object()));
         assertFalse(diskMap1.equals(null));
 
+        Files.delete(Paths.get("testFiles/testFile.txt"));
+
+        Files.delete(Paths.get("testFiles/testFile2.txt"));
+
     }
 
     @Test
     void changeThrow() throws IOException {
-        Path path = Paths.get("testFilesDiskMap/testFile.txt");
+        Path path = Paths.get("testFiles/testFile.txt");
         DiskMap diskMap = createNewDiskMapForTest(path);
         if (Files.exists(path)) {
             Files.delete(path);
