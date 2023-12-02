@@ -13,8 +13,9 @@ import java.util.zip.CheckedOutputStream;
 
 public class ArrowsAccess {
 
-    public void getPrintWriter(String path, String text) {
+    public void getPrintWriter(String path, String text) throws IOException {
         File file = new File(path);
+        file.createNewFile();
         try (OutputStream outputStream = new FileOutputStream(file);
              CheckedOutputStream checkedOutputStream = new CheckedOutputStream(outputStream, new Adler32());
              BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(checkedOutputStream);
