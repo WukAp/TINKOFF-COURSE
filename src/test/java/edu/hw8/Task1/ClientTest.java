@@ -15,10 +15,10 @@ class ClientTest {
     }
 
     @Test
-    void getPhraseFromServer() throws IOException {
+    void getPhraseFromServer() throws IOException, InterruptedException {
         thread.start();
-
-        assertDoesNotThrow(() -> client.getPhraseFromServer("противники"));
+Thread.sleep(2000);
+    assertDoesNotThrow(() -> client.getPhraseFromServer("противники"));
         assertEquals(
             "Если твои противники перешли на личные оскорбления, будь уверена — твоя победа не за горами",
             client.getPhraseFromServer("противники")
