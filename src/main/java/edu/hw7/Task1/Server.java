@@ -1,33 +1,36 @@
 package edu.hw7.Task1;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.io.Writer;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-    public static void start(int maxThreads) {
-        try (ServerSocket serverSocket = new ServerSocket(8080);
+    public static int PORT = 8080;
+    public static final String DEFAULT_PHRASE = "Я не хочу продолжать этот разговор";
+    private final List<String> phrases;
+    private final String FILE_NAME = "src/main/resources/hw7.Task1/phrases_for_Vanya";
+    private volatile boolean isStopped = false;
+
+    public Server() throws IOException {
+        phrases = new ArrayList<>();
+        readPhrasesFromFile();
+    }
+
+    public void start(int maxThreads) {
+        try (ServerSocket serverSocket = new ServerSocket(PORT);
              ExecutorService executorService = Executors.newFixedThreadPool(maxThreads)) {
-            while (true) {
+            while (!isStopped) {
                 var socket = serverSocket.accept();
                 executorService.submit(() -> {
                     try {
@@ -43,15 +46,38 @@ public class Server {
         }
     }
 
-    private static void answer(Socket client) throws IOException {
+    public void stop() {
+        isStopped = false;
+    }
+
+    private void answer(Socket client) throws IOException {
 
         var request = new BufferedReader(new InputStreamReader((client.getInputStream()))).readLine();
-        System.out.println(request);
-
         Writer writer = new OutputStreamWriter(client.getOutputStream(), StandardCharsets.UTF_8);
         PrintWriter out = new PrintWriter(writer, true);
 
-        out.println("Hello, Worldwrwerw");
+        out.println(getPhrase(request));
 
     }
+
+    private void readPhrasesFromFile() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
+        String line = reader.readLine();
+        while (line != null) {
+            phrases.add(line);
+            line = reader.readLine();
+        }
+        reader.close();
+    }
+
+    private String getPhrase(String keyWord) {
+        for (String phrase : phrases) {
+            if (phrase.toUpperCase().contains(keyWord.toUpperCase())) {
+                return phrase;
+            }
+        }
+        return DEFAULT_PHRASE;
+    }
+
 }
+

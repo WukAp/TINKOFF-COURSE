@@ -12,23 +12,21 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 public class Client {
+    public static int PORT = 8080;
 
-    public static void main(String[] args) throws IOException {
-        try (Socket client = new Socket(InetAddress.getByName("localhost"), 8080)) {
 
-            InputStream is = client.getInputStream();
+    public String getPhraseFromServer(String keyWord) throws IOException {
+        try (Socket client = new Socket(InetAddress.getLocalHost(), 8080)) {
+
             OutputStream os = client.getOutputStream();
             Writer writer = new OutputStreamWriter(os, StandardCharsets.UTF_8);
             PrintWriter out = new PrintWriter(writer, true);
-            out.println("Hello, Worldwrwerw");
-            BufferedReader in =
-                new BufferedReader
-                    (new InputStreamReader(is, StandardCharsets.UTF_8));
+            out.println(keyWord);
 
-            var response = new BufferedReader(new InputStreamReader((client.getInputStream()))).readLine();
-            System.out.println(response);
+            return new BufferedReader(new InputStreamReader((client.getInputStream()))).readLine();
         }
     }
 }
