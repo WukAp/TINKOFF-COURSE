@@ -16,10 +16,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-    public static int PORT = 8080;
+    @SuppressWarnings("MagicNumber")
+    public static final int PORT = 8080;
     public static final String DEFAULT_PHRASE = "Я не хочу продолжать этот разговор";
     private final List<String> phrases;
-    private final String FILE_NAME = "src/main/resources/hw7.Task1/phrases_for_Vanya";
+    private final String fileName = "src/main/resources/hw7.Task1/phrases_for_Vanya";
     private volatile boolean isStopped = false;
 
     public Server() throws IOException {
@@ -61,7 +62,7 @@ public class Server {
     }
 
     private void readPhrasesFromFile() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line = reader.readLine();
         while (line != null) {
             phrases.add(line);
