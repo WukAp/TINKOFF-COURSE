@@ -145,7 +145,7 @@ public class DiskMap implements Map<String, String> {
     }
 
     private Map<String, String> readMap() throws IOException {
-        try (FileInputStream fileInput = new FileInputStream(path.toString());) {
+        try (FileInputStream fileInput = new FileInputStream(path.toString())) {
             ObjectInputStream objectInput
                 = new ObjectInputStream(fileInput);
             Map<String, String> newHashMap =

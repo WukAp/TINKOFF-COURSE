@@ -16,10 +16,10 @@ public class PortsAnalyzer {
     public List<PortsInformation> analyze() {
         List<PortsInformation> unallocatedPorts = new ArrayList<>();
         for (int port = 1; port < 49151; port++) {
-            if (!isEmptyTCP(port)) {
+            if (isTCPOpen(port)) {
                 unallocatedPorts.add(new PortsInformation(Protocol.TCP, port, getPortsInfo(port)));
             }
-            if (!isEmptyUDP(port)) {
+            if (isUDPOpen(port)) {
                 unallocatedPorts.add(new PortsInformation(Protocol.UDP, port, getPortsInfo(port)));
             }
         }
@@ -37,19 +37,19 @@ public class PortsAnalyzer {
 
     }
 
-    private boolean isEmptyUDP(int port) {
+    private boolean isUDPOpen(int port) {
         try (DatagramSocket datagramSocket = new DatagramSocket(port)) {
-            return true;
-        } catch (SocketException e) {
             return false;
+        } catch (SocketException e) {
+            return true;
         }
     }
 
-    private boolean isEmptyTCP(int port) {
+    private boolean isTCPOpen(int port) {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            return true;
-        } catch (IOException e) {
             return false;
+        } catch (IOException e) {
+            return true;
         }
     }
 
