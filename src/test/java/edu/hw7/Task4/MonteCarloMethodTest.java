@@ -17,7 +17,7 @@ class MonteCarloMethodTest {
         double eps = 0.01;
         assertTrue(Math.abs(monteCarloMethod.countPiUsingOneThread(1_000_000) - Math.PI) < eps);
         assertTrue(Math.abs(monteCarloMethod.countPiUsingOneThread(10_000_000) - Math.PI) < eps);
-        //assertTrue(Math.abs(monteCarloMethod.countPiUsingOneThread(1_000_000_000) - Math.PI) < eps);
+        assertTrue(Math.abs(monteCarloMethod.countPiUsingOneThread(1_000_000_000) - Math.PI) < eps);
     }
 
     @Test
@@ -26,13 +26,14 @@ class MonteCarloMethodTest {
         double eps = 0.01;
         assertTrue(Math.abs(monteCarloMethod.countPiUsingMultiThread(1_000_000) - Math.PI) < eps);
         assertTrue(Math.abs(monteCarloMethod.countPiUsingMultiThread(10_000_000) - Math.PI) < eps);
-        //assertTrue(Math.abs(monteCarloMethod.countPiUsingMultiThread(1_000_000_000) - Math.PI) < eps);
+        assertTrue(Math.abs(monteCarloMethod.countPiUsingMultiThread(1_000_000_000) - Math.PI) < eps);
     }
+
     @Test
     void getInfo() throws ExecutionException, InterruptedException {
 
-       // printComparison(100_000_000);
-       // printComparison(100_000_000);
+        printComparison(100_000_000);
+        printComparison(100_000_000);
         printComparison(1_000_000_000);
     }
 
