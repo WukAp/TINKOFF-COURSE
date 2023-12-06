@@ -14,12 +14,20 @@ public class HackerNews {
     private static final String HACKER_NEWS_ADDRESS = "https://hacker-news.firebaseio.com/v0/";
 
     public long[] hackerNewsTopStories() throws URISyntaxException {
-        HttpRequest request =
-            HttpRequest.newBuilder(new URI(HACKER_NEWS_ADDRESS + "topstories.json")).build();
+        try (HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).build()) {
+            return (hackerNewsTopStories(client));
+        }
+    }
 
-        try (HttpClient client = HttpClient.newBuilder()
-            .version(HttpClient.Version.HTTP_1_1)
-            .build()) {
+    public String news(long id) throws URISyntaxException, IOException, InterruptedException {
+        try (HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).build()) {
+            return news(client, id);
+        }
+    }
+
+    public long[] hackerNewsTopStories(HttpClient client) throws URISyntaxException {
+        HttpRequest request = HttpRequest.newBuilder(new URI(HACKER_NEWS_ADDRESS + "topstories.json")).build();
+        try {
             var responseBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
 
             return Arrays.stream(responseBody.substring(1, responseBody.length() - 1).split(","))
@@ -30,20 +38,16 @@ public class HackerNews {
         }
     }
 
-    public String news(long id) throws URISyntaxException, IOException, InterruptedException {
-        HttpRequest request =
-            HttpRequest.newBuilder(new URI(HACKER_NEWS_ADDRESS + "item/" + id + ".json")).build();
+    public String news(HttpClient client, long id) throws URISyntaxException, IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder(new URI(HACKER_NEWS_ADDRESS + "item/" + id + ".json")).build();
 
-        try (HttpClient client = HttpClient.newBuilder()
-            .version(HttpClient.Version.HTTP_1_1)
-            .build()) {
-            var responseBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+        var responseBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
 
-            Matcher matcher = Pattern.compile("\"title\":\"([^\"]*)\"").matcher(responseBody);
-            if (!matcher.find()) {
-                throw new IllegalArgumentException("Illegal request body");
-            }
-            return matcher.group(1);
+        Matcher matcher = Pattern.compile("\"title\":\"([^\"]*)\"").matcher(responseBody);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException("Illegal request body");
         }
+        return matcher.group(1);
+
     }
 }
