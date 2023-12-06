@@ -27,36 +27,62 @@ class FixedThreadPoolTest {
         assertDoesNotThrow(() -> FixedThreadPool.create(10).close());
         assertDoesNotThrow(() -> {
             FixedThreadPool fixedThreadPool = FixedThreadPool.create(10);
+            fixedThreadPool.start();
             fixedThreadPool.execute(() -> getFibonacci(6));
             fixedThreadPool.execute(() -> getFibonacci(11));
-            fixedThreadPool.execute(() ->  getFibonacci(16));
-            fixedThreadPool.execute(() ->  getFibonacci(18));
+            fixedThreadPool.execute(() -> getFibonacci(16));
+            fixedThreadPool.execute(() -> getFibonacci(18));
             fixedThreadPool.execute(() -> getFibonacci(29));
+            fixedThreadPool.close();
+        });
+        assertDoesNotThrow(() -> {
+            FixedThreadPool fixedThreadPool = FixedThreadPool.create(10);
             fixedThreadPool.start();
+            fixedThreadPool.execute(() -> getFibonacci(6));
+            fixedThreadPool.execute(() -> getFibonacci(11));
+            fixedThreadPool.execute(() -> getFibonacci(16));
+            fixedThreadPool.execute(() -> getFibonacci(18));
+            fixedThreadPool.execute(() -> getFibonacci(29));
+            fixedThreadPool.joinStartAll();
             fixedThreadPool.close();
         });
     }
 
     @Test
-    void calculateFibonacci() {
+    void calculateFibonacci() throws InterruptedException {
         FixedThreadPool fixedThreadPool = FixedThreadPool.create(10);
+        fixedThreadPool.start();
         fixedThreadPool.execute(() -> assertEquals(5, getFibonacci(6)));
         fixedThreadPool.execute(() -> assertEquals(55, getFibonacci(11)));
         fixedThreadPool.execute(() -> assertEquals(610, getFibonacci(16)));
         fixedThreadPool.execute(() -> assertEquals(1597, getFibonacci(18)));
         fixedThreadPool.execute(() -> assertEquals(317811, getFibonacci(29)));
-        fixedThreadPool.start();
+        fixedThreadPool.execute(() -> assertNotEquals(0, getFibonacci(29)));
+        fixedThreadPool.execute(() -> assertNotEquals(0, getFibonacci(5)));
+        fixedThreadPool.execute(() -> assertNotEquals(0, getFibonacci(8)));
+        fixedThreadPool.joinStartAll();
+        Thread.sleep(1000);
+        fixedThreadPool.close();
     }
 
     @Test
-    void tooManyThreadsException() {
+    void manyThreadsException() {
         FixedThreadPool fixedThreadPool = FixedThreadPool.create(10);
-        assertThrows(IllegalStateException.class, () -> {
-            for (int i = 0; i < 11; i++) {
+        fixedThreadPool.start();
+        assertDoesNotThrow(() -> {
+            for (int i = 0; i < 30; i++) {
                 fixedThreadPool.execute(() -> {
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+
+                    }
                 });
             }
+            fixedThreadPool.joinStartAll();
         });
+
+        fixedThreadPool.close();
     }
 
     private long getFibonacci(int n) {

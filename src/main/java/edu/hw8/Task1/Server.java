@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
-    @SuppressWarnings("MagicNumber")
+
     public static final int PORT = 8080;
     public static final String DEFAULT_PHRASE = "Я не хочу продолжать этот разговор";
     private final List<String> phrases;
