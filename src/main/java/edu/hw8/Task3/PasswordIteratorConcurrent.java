@@ -1,4 +1,6 @@
 package edu.hw8.Task3;
 
-public class PasswordIteratorConcurrent {
+import java.util.Iterator;
+
+public class PasswordIteratorConcurrent  {
 }
