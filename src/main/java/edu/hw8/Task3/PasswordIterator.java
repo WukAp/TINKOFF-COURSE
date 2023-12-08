@@ -12,16 +12,30 @@ public class PasswordIterator implements Iterator<String> {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
     );
     private final char[] password;
-    private final int length;
+    private final int unknownLetters;
     private Iterator<Character>[] characterIterators;
 
     public PasswordIterator(int length) {
-        this.length = length;
+        this.unknownLetters = length;
         this.password = new char[length];
         this.characterIterators = new Iterator[length];
         for (int i = 0; i < length; i++) {
             characterIterators[i] = PASSWORD_CHARACTERS.iterator();
         }
+    }
+
+    public PasswordIterator(int length, char lastChar) {
+        this.unknownLetters = length - 1;
+        this.password = new char[length];
+        this.password[length - 1] = lastChar;
+        this.characterIterators = new Iterator[this.unknownLetters];
+        for (int i = 0; i < this.unknownLetters; i++) {
+            characterIterators[i] = PASSWORD_CHARACTERS.iterator();
+        }
+    }
+
+    public static Iterator<Character> getCharacterIterator() {
+        return PASSWORD_CHARACTERS.iterator();
     }
 
     @Override
@@ -31,19 +45,15 @@ public class PasswordIterator implements Iterator<String> {
 
     @Override
     public String next() {
-
-        for (int i = length - 1; i >= 0; i--) {
+        for (int i = unknownLetters - 1; i >= 0; i--) {
             if (characterIterators[i].hasNext()) {
-
                 password[i] = characterIterators[i].next();
-                return String.valueOf(password);
+                return String.valueOf(password).trim();
             } else {
                 if (i > 0) {
                     characterIterators[i] = PASSWORD_CHARACTERS.iterator();
                 }
-
             }
-
         }
         throw new IllegalStateException("has not next element");
     }
