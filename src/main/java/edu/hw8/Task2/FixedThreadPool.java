@@ -57,7 +57,7 @@ public class FixedThreadPool implements ThreadPool {
 
     private class ThreadPoolTask implements Runnable {
         @Override
-        public synchronized void run() {
+        public void run() {
             while (isStarted) {
                 var task = workQueue.poll();
                 if (task != null) {

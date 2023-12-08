@@ -16,10 +16,6 @@ class PasswordsSearcherTest {
     private final static Logger LOGGER = LogManager.getLogger();
 
     @Test
-    void test() {
-    }
-
-    @Test
     void findPasswordsUsingOneThread() {
         var passwordMap = passwordsSearcher.findPasswordsUsingOneThread();
         assertEquals(3, passwordMap.size());

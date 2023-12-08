@@ -1,7 +1,13 @@
 package edu.hw8.Task2;
 
+import net.jodah.concurrentunit.Waiter;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.opentest4j.AssertionFailedError;
 
+import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FixedThreadPoolTest {
@@ -47,20 +53,24 @@ class FixedThreadPoolTest {
         });
     }
 
-    @Test
-    void calculateFibonacci() throws InterruptedException {
+    @ParameterizedTest
+    @CsvSource(value = {
+        "6, 5",
+        "11, 55",
+        "16, 610",
+        "18, 1597",
+        "29, 317811",
+    })
+    void calculateFibonacci(int n, long answer) throws Throwable {
+
+        final Waiter waiter = new Waiter();
         FixedThreadPool fixedThreadPool = FixedThreadPool.create(10);
         fixedThreadPool.start();
-        fixedThreadPool.execute(() -> assertEquals(5, getFibonacci(6)));
-        fixedThreadPool.execute(() -> assertEquals(55, getFibonacci(11)));
-        fixedThreadPool.execute(() -> assertEquals(610, getFibonacci(16)));
-        fixedThreadPool.execute(() -> assertEquals(1597, getFibonacci(18)));
-        fixedThreadPool.execute(() -> assertEquals(317811, getFibonacci(29)));
-        fixedThreadPool.execute(() -> assertNotEquals(0, getFibonacci(29)));
-        fixedThreadPool.execute(() -> assertNotEquals(0, getFibonacci(5)));
-        fixedThreadPool.execute(() -> assertNotEquals(0, getFibonacci(8)));
-        fixedThreadPool.joinStartAll();
-        Thread.sleep(1000);
+        fixedThreadPool.execute(() -> {
+            waiter.assertTrue(answer == getFibonacci(n));
+            waiter.resume();
+        });
+        waiter.await(1, TimeUnit.SECONDS);
         fixedThreadPool.close();
     }
 
