@@ -24,7 +24,12 @@ class FixedThreadPoolTest {
 
     @Test
     void execute() {
-        assertDoesNotThrow(() -> FixedThreadPool.create(10).execute(() -> getFibonacci(50)));
+        assertThrows(IllegalStateException.class, () -> FixedThreadPool.create(10).execute(() -> getFibonacci(50)));
+        assertDoesNotThrow(() -> {
+            var pool = FixedThreadPool.create(10);
+            pool.start();
+            pool.execute(() -> getFibonacci(50));
+        });
     }
 
     @Test
@@ -87,8 +92,9 @@ class FixedThreadPoolTest {
 
                     }
                 });
+                fixedThreadPool.joinStartAll();
             }
-            fixedThreadPool.joinStartAll();
+
         });
 
         fixedThreadPool.close();
