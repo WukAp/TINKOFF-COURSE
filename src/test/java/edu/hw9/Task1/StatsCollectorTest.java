@@ -1,5 +1,6 @@
-package edu.hw9;
+package edu.hw9.Task1;
 
+import edu.hw9.Task1.StatsCollector;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

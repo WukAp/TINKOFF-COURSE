@@ -1,5 +1,6 @@
-package edu.hw9;
+package edu.hw9.Task1;
 
+import edu.hw9.Task1.StatInfo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
