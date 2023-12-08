@@ -11,7 +11,7 @@ public class FixedThreadPool implements ThreadPool {
     private List<Thread> threads;
     private final int maxThreadsAmount;
     private volatile boolean isStarted;
-    private Queue<Runnable> taskQueue = new ConcurrentLinkedQueue<>();
+    private final Queue<Runnable> taskQueue = new ConcurrentLinkedQueue<>();
 
     private FixedThreadPool(int maxThreadsAmount) {
         threads = new ArrayList<>();
