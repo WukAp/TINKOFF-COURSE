@@ -2,7 +2,6 @@ package edu.hw8.Task2;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.Executors;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FixedThreadPoolTest {

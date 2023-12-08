@@ -1,12 +1,10 @@
 package edu.hw8.Task3;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 public class PasswordIterator implements Iterator<String> {
-    private static final List<Character> passwordCharacters = List.of(
+    private static final List<Character> PASSWORD_CHARACTERS = List.of(
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o',
         'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
@@ -22,7 +20,7 @@ public class PasswordIterator implements Iterator<String> {
         this.password = new char[length];
         this.characterIterators = new Iterator[length];
         for (int i = 0; i < length; i++) {
-            characterIterators[i] = passwordCharacters.iterator();
+            characterIterators[i] = PASSWORD_CHARACTERS.iterator();
         }
     }
 
@@ -41,7 +39,7 @@ public class PasswordIterator implements Iterator<String> {
                 return String.valueOf(password);
             } else {
                 if (i > 0) {
-                    characterIterators[i] = passwordCharacters.iterator();
+                    characterIterators[i] = PASSWORD_CHARACTERS.iterator();
                 }
 
             }

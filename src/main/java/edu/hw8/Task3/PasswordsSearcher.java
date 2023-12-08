@@ -3,10 +3,8 @@ package edu.hw8.Task3;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import javax.xml.bind.DatatypeConverter;
 
@@ -38,7 +36,6 @@ public class PasswordsSearcher {
             var name = getNameByPassword(currentPassword);
             if (name != null) {
                 result.put(name, currentPassword);
-                System.out.println(result);
             }
         }
         return result;
