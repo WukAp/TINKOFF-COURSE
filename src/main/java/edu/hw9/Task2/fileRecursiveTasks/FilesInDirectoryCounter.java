@@ -18,6 +18,9 @@ public class FilesInDirectoryCounter extends RecursiveTask<Integer> {
         if (rootFile.isFile()) {
             return 1;
         }
+        if (rootFile.listFiles() == null) {
+            return 0;
+        }
         var computedList =
             Arrays.stream(rootFile.listFiles())
                 .map(FilesInDirectoryCounter::new)

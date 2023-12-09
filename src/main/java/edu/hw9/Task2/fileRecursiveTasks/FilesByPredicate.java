@@ -24,6 +24,9 @@ public class FilesByPredicate extends RecursiveTask<List<File>> {
         if (rootFile.isFile()) {
             return filePredicate.test(rootFile) ? Collections.singletonList(rootFile) : List.of();
         }
+        if (rootFile.listFiles() == null) {
+            return List.of();
+        }
         var computedList =
             Arrays.stream(rootFile.listFiles())
                 .map((file) -> new FilesByPredicate(file, filePredicate))
