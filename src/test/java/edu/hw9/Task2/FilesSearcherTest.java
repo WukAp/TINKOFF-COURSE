@@ -10,6 +10,10 @@ class FilesSearcherTest {
     void getAmountOfFilesAsync() { //48ms
         FilesSearcher filesSearcher = new FilesSearcher();
         assertEquals(
+            0,
+            filesSearcher.getAmountOfFileAsync(new File("testFilesForHw9/null"))
+        );
+        assertEquals(
             6003,
             filesSearcher.getAmountOfFileAsync(new File("testFilesForHw9"))
         );
@@ -23,6 +27,10 @@ class FilesSearcherTest {
     @Test
     void getAmountOfFilesSync() {//76ms
         FilesSearcher filesSearcher = new FilesSearcher();
+        assertEquals(
+            0,
+            filesSearcher.getAmountOfFileSync(new File("testFilesForHw9/null"))
+        );
         assertEquals(
             6003,
             filesSearcher.getAmountOfFileSync(new File("testFilesForHw9"))
@@ -50,6 +58,14 @@ class FilesSearcherTest {
     void getFileByPredicateAsync() {//119ms
         FilesSearcher filesSearcher = new FilesSearcher();
         assertEquals(
+            0,
+            filesSearcher.getFileByPredicateAsync(
+                new File(
+                    "testFilesForHw9/null"),
+                (file) -> file.getName().matches(".*\\.txt")
+            ).size()
+        );
+        assertEquals(
             6002,
             filesSearcher.getFileByPredicateAsync(
                 new File(
@@ -77,7 +93,7 @@ class FilesSearcherTest {
             1,
             filesSearcher.getFileByPredicateAsync(
                 new File(
-                    "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"),
+                    "testFilesForHw9"),
                 (file) -> file.length() == 4571
             ).size()
         );
@@ -87,10 +103,18 @@ class FilesSearcherTest {
     void getFileByPredicateSync() { //253ms
         FilesSearcher filesSearcher = new FilesSearcher();
         assertEquals(
+            0,
+            filesSearcher.getFileByPredicateSync(
+                new File(
+                    "testFilesForHw9/null"),
+                (file) -> file.getName().matches(".*\\.txt")
+            ).size()
+        );
+        assertEquals(
             6002,
             filesSearcher.getFileByPredicateSync(
                 new File(
-                    "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"),
+                    "testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.txt")
             ).size()
         );
@@ -98,7 +122,7 @@ class FilesSearcherTest {
             1,
             filesSearcher.getFileByPredicateSync(
                 new File(
-                    "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"),
+                    "testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.jpeg")
             ).size()
         );
@@ -106,7 +130,7 @@ class FilesSearcherTest {
             0,
             filesSearcher.getFileByPredicateSync(
                 new File(
-                    "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"),
+                    "testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.png")
             ).size()
         );
@@ -114,7 +138,7 @@ class FilesSearcherTest {
             1,
             filesSearcher.getFileByPredicateSync(
                 new File(
-                    "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"),
+                    "testFilesForHw9"),
                 (file) -> file.length() == 4571
             ).size()
         );
