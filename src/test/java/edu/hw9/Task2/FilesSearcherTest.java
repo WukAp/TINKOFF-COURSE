@@ -11,12 +11,12 @@ class FilesSearcherTest {
         FilesSearcher filesSearcher = new FilesSearcher();
         assertEquals(
             6003,
-            filesSearcher.getAmountOfFileAsync(new File("/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"))
+            filesSearcher.getAmountOfFileAsync(new File("testFilesForHw9"))
         );
         assertEquals(
             1500,
             filesSearcher.getAmountOfFileAsync(new File(
-                "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9/directoryWith1500Files"))
+                "testFilesForHw9/directoryWith1500Files"))
         );
     }
 
@@ -25,12 +25,12 @@ class FilesSearcherTest {
         FilesSearcher filesSearcher = new FilesSearcher();
         assertEquals(
             6003,
-            filesSearcher.getAmountOfFileSync(new File("/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"))
+            filesSearcher.getAmountOfFileSync(new File("testFilesForHw9"))
         );
         assertEquals(
             1500,
             filesSearcher.getAmountOfFileSync(new File(
-                "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9/directoryWith1500Files"))
+                "testFilesForHw9/directoryWith1500Files"))
         );
     }
 
@@ -38,11 +38,11 @@ class FilesSearcherTest {
     void isDirectoryContainsMoreThen1000Files() {
         FilesSearcher filesSearcher = new FilesSearcher();
         assertTrue(
-            filesSearcher.getAmountOfFileSync(new File("/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9")) > 1000
+            filesSearcher.getAmountOfFileSync(new File("testFilesForHw9")) > 1000
         );
         assertTrue(
             filesSearcher.getAmountOfFileSync(new File(
-                "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9/directoryWith1500Files")) > 1000
+                "testFilesForHw9/directoryWith1500Files")) > 1000
         );
     }
 
@@ -53,7 +53,7 @@ class FilesSearcherTest {
             6002,
             filesSearcher.getFileByPredicateAsync(
                 new File(
-                    "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"),
+                    "testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.txt")
             ).size()
         );
@@ -61,7 +61,7 @@ class FilesSearcherTest {
             1,
             filesSearcher.getFileByPredicateAsync(
                 new File(
-                    "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"),
+                    "testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.jpeg")
             ).size()
         );
@@ -69,7 +69,7 @@ class FilesSearcherTest {
             0,
             filesSearcher.getFileByPredicateAsync(
                 new File(
-                    "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"),
+                    "testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.png")
             ).size()
         );
