@@ -1,14 +1,18 @@
-package edu.project2.solvers;
+package edu.hw9.Task3;
 
 import edu.project2.models.Coordinate;
 import edu.project2.models.Maze;
+import edu.project2.solvers.BacktrackingSolver;
+import edu.project2.solvers.Solver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static edu.project2.models.Maze.Cell.WALL;
 import static edu.project2.models.Maze.Cell.PASSAGE;
+import static edu.project2.models.Maze.Cell.WALL;
+import static org.junit.jupiter.api.Assertions.*;
 
-class BacktrackingSolverTest {
+class BacktrackingSolverAsyncTest {
+
     Maze simpleMaze = new Maze(
         5,
         5,
@@ -72,7 +76,8 @@ class BacktrackingSolverTest {
 
     @Test
     void solve() {
-        Solver solver = new BacktrackingSolver();
+        Solver solver = new BacktrackingSolverAsync();
+
         Assertions.assertArrayEquals(
             new Coordinate[] {new Coordinate(1, 1), new Coordinate(1, 2)},
             solver.solve(simpleMaze, new Coordinate(1, 1), new Coordinate(1, 2)).toArray()
@@ -96,7 +101,7 @@ class BacktrackingSolverTest {
 
     @Test
     void solveExceptions() {
-        Solver solver = new BacktrackingSolver();
+        Solver solver = new BacktrackingSolverAsync();
         Assertions.assertThrows(
             IllegalArgumentException.class,
             () -> solver.solve(bigMaze, new Coordinate(0, 0), new Coordinate(1, 3))

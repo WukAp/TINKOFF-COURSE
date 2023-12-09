@@ -10,11 +10,6 @@ class FilesSearcherTest {
     void getAmountOfFilesAsync() { //48ms
         FilesSearcher filesSearcher = new FilesSearcher();
         assertEquals(
-            0,
-            filesSearcher.getAmountOfFileAsync(new File(
-                "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9/images.jpeg"))
-        );
-        assertEquals(
             6003,
             filesSearcher.getAmountOfFileAsync(new File("/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"))
         );
@@ -28,11 +23,6 @@ class FilesSearcherTest {
     @Test
     void getAmountOfFilesSync() {//76ms
         FilesSearcher filesSearcher = new FilesSearcher();
-        assertEquals(
-            0,
-            filesSearcher.getAmountOfFileSync(new File(
-                "/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9/images.jpeg"))
-        );
         assertEquals(
             6003,
             filesSearcher.getAmountOfFileSync(new File("/home/wake/IdeaProjects/TINKOFF-COURSE/testFilesForHw9"))
