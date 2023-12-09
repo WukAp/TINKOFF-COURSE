@@ -31,7 +31,7 @@ public class FilesSearcher {
     }
 
     public List<File> getFileByPredicateSync(File rootFile, Predicate<File> filePredicate) {
-        if (rootFile == null || rootFile.isFile()) {
+        if (rootFile.listFiles() == null || rootFile.isFile()) {
             return filePredicate.test(rootFile) ? Collections.singletonList(rootFile) : List.of();
         }
         return
@@ -49,11 +49,11 @@ public class FilesSearcher {
     }
 
     private int getAmountOfFileRecursiveHelper(File rootFile) {
-        if (rootFile == null) {
-            return 0;
-        }
         if (rootFile.isFile()) {
             return 1;
+        }
+        if (rootFile.listFiles() == null) {
+            return 0;
         }
         return Arrays.stream(rootFile.listFiles())
             .mapToInt((this::getAmountOfFileRecursiveHelper))
