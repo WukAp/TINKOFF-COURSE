@@ -67,7 +67,9 @@ class ImageUtilsTest {
             ), 4000, a
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3"), ImageFormat.PNG);
-    }    @Test void save4() {
+    }
+
+    @Test void save4() {
         Renderer renderer = new OneThreadRenderer();
         short a = 100;
         var canvas = renderer.render(
