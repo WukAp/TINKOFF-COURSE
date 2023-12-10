@@ -110,5 +110,4 @@ class BacktrackingSolverTest {
             () -> solver.solve(bigMaze, new Coordinate(0, 0), new Coordinate(0, 0))
         );
     }
-
 }
