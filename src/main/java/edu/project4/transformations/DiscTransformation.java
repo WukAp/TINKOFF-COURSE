@@ -2,7 +2,7 @@ package edu.project4.transformations;
 
 import edu.project4.models.Point;
 
-public class DiscTransformation extends TransformationWithColor{
+public class DiscTransformation extends TransformationWithColor {
     @Override
     public Point apply(Point point) {
         double radius = radius(point);

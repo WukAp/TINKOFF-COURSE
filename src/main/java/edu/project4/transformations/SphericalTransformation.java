@@ -2,7 +2,7 @@ package edu.project4.transformations;
 
 import edu.project4.models.Point;
 
-public class SphericalTransformation extends TransformationWithColor{
+public class SphericalTransformation extends TransformationWithColor {
     @Override
     public Point apply(Point point) {
         double radiusSquared = radiusSquared(point);

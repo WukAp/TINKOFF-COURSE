@@ -8,6 +8,7 @@ import java.util.List;
 
 // может быть несколько имплементаций интерфейса: однопоточный, многопоточный и т.п.
 @FunctionalInterface
+@SuppressWarnings("ParameterNumber")
 public interface Renderer {
     FractalImage render(
         int width,
@@ -29,6 +30,6 @@ public interface Renderer {
         int samples,
         short iterationsPerSample
     ) {
-        return render(width, height, world, variations,affineTransformations, samples, iterationsPerSample, 1);
+        return render(width, height, world, variations, affineTransformations, samples, iterationsPerSample, 1);
     }
 }

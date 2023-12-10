@@ -14,6 +14,7 @@ public class OneThreadRenderer implements Renderer {
     private final static int EMPTY_STEPS = 20;
     private final static Color DEFAULT_COLOR = new Color(200, 50, 200);
 
+    @SuppressWarnings("ParameterNumber")
     @Override
     public FractalImage render(
         int width,

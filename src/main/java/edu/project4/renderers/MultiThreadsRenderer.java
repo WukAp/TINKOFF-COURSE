@@ -24,6 +24,7 @@ public class MultiThreadsRenderer implements Renderer {
         this.threadAmount = threadAmount;
     }
 
+    @SuppressWarnings("ParameterNumber")
     @Override
     public FractalImage render(
         final int width,

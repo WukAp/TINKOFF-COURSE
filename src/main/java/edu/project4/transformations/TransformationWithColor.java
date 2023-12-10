@@ -1,9 +1,7 @@
 package edu.project4.transformations;
 
-import edu.project2.models.Coordinate;
+
 import edu.project4.models.Color;
-import javax.xml.bind.annotation.XmlType;
-import java.awt.image.ColorConvertOp;
 
 public abstract class TransformationWithColor implements Transformation {
 
