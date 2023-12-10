@@ -25,13 +25,13 @@ public class MultiThreadsRenderer implements Renderer {
 
     @Override
     public FractalImage render(
-        int width,
-        int height,
-        Rect world,
-        List<Transformation> variations,
-        int samples,
-        short iterationsPerSample,
-        int symmetry
+        final int width,
+        final int height,
+        final Rect world,
+        final List<Transformation> variations,
+        final int samples,
+        final short iterationsPerSample,
+        final int symmetry
     ) {
         List<Callable<FractalImage>> tasks = new ArrayList<>();
 
@@ -52,7 +52,6 @@ public class MultiThreadsRenderer implements Renderer {
             for (var future : futures) {
                 created.add(future.get());
             }
-
             return new FractalImage(mergeFractalImage(created), width, height);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);

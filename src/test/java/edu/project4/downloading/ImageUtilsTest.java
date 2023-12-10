@@ -64,11 +64,25 @@ class ImageUtilsTest {
                 new SpiralTransformation(),
                 new PolarTransformation(),
                 new DiamondTransformation()
-            ), 4000, a
+            ), 40000, a
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3"), ImageFormat.PNG);
     }
 
+    @Test void save3MultiThread() {
+        Renderer renderer = new MultiThreadsRenderer(15);
+        short a = 100;
+        var canvas = renderer.render(
+
+            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
+
+                new SpiralTransformation(),
+                new PolarTransformation(),
+                new DiamondTransformation()
+            ), 40000, a
+        );
+        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3multi"), ImageFormat.PNG);
+    }
     @Test void save4() {
         Renderer renderer = new OneThreadRenderer();
         short a = 100;
@@ -79,23 +93,9 @@ class ImageUtilsTest {
                 new HandkerchiefTransformation(),
                 new SwirlTransformation(),
                 new HorseshoeTransformation()
-            ), 4000, a
+            ), 40000, a
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic4"), ImageFormat.PNG);
     }
 
-    @Test void save3MultiThread() {
-        Renderer renderer = new MultiThreadsRenderer(5);
-        short a = 100;
-        var canvas = renderer.render(
-
-            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
-
-                new SpiralTransformation(),
-                new PolarTransformation(),
-                new DiamondTransformation()
-            ), 4000, a
-        );
-        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3multi"), ImageFormat.PNG);
-    }
 }
