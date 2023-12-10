@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class OneThreadRenderer implements Renderer {
-    private final ThreadLocalRandom THREAD_LOCAL_RANDOM = ThreadLocalRandom.current();
+    private final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private final static int EMPTY_STEPS = 20;
     private final static Color DEFAULT_COLOR = new Color(200, 50, 200);
 
@@ -57,14 +57,14 @@ public class OneThreadRenderer implements Renderer {
 
     public Point random(Rect world) {
         return new Point(
-            THREAD_LOCAL_RANDOM.nextDouble(0, world.maxX()),
-            THREAD_LOCAL_RANDOM.nextDouble(0, world.maxY())
+            threadLocalRandom.nextDouble(0, world.maxX()),
+            threadLocalRandom.nextDouble(0, world.maxY())
         );
     }
 
     public Transformation random(List<Transformation> variations) {
         return variations.get(
-            THREAD_LOCAL_RANDOM.nextInt(variations.size())
+            threadLocalRandom.nextInt(variations.size())
         );
     }
 
