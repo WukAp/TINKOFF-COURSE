@@ -43,7 +43,7 @@ public class MonteCarloMethod {
             double x = random.nextDouble() - r;
             double y = random.nextDouble() - r;
 
-            //if point(x, y) is in circle
+            //if point(minX, minY) is in circle
             if (x * x + y * y < sqrtR) {
                 circleCount++;
             }

@@ -13,7 +13,7 @@ public sealed abstract class ValidationError extends Exception {
     public static final class IllegalHeightArgumentException extends ValidationError {
         @Override
         public String getProblemField() {
-            return "height";
+            return "maxY";
         }
     }
 

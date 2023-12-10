@@ -81,8 +81,8 @@ class RectangleTest {
     }
 
     @Test void testToString() {
-        Assertions.assertEquals("Rectangle{width=15, height=1}", new Rectangle(15, 1).toString());
-        Assertions.assertEquals("Rectangle{width=10, height=5}", new Rectangle(10, 5).toString());
-        Assertions.assertEquals("Rectangle{width=3, height=1}", new Rectangle(3, 1).toString());
+        Assertions.assertEquals("Rectangle{maxX=15, maxY=1}", new Rectangle(15, 1).toString());
+        Assertions.assertEquals("Rectangle{maxX=10, maxY=5}", new Rectangle(10, 5).toString());
+        Assertions.assertEquals("Rectangle{maxX=3, maxY=1}", new Rectangle(3, 1).toString());
     }
 }

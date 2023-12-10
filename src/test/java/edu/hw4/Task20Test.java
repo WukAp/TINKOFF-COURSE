@@ -25,13 +25,13 @@ public class Task20Test {
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get("Pelmen").contains("weight"));
 
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get("Fed").matches("(.*)\\n"));
-        Assertions.assertTrue(prettyPrintIncorrectAnimals.get("Fed").contains("height"));
+        Assertions.assertTrue(prettyPrintIncorrectAnimals.get("Fed").contains("maxY"));
 
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).matches("(.*)\\n(.*)\\n(.*)\\n(.*)\\n"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).contains("name"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).contains("type"));
         Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).contains("age"));
-        Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).contains("height"));
+        Assertions.assertTrue(prettyPrintIncorrectAnimals.get(null).contains("maxY"));
         Assertions.assertFalse(prettyPrintIncorrectAnimals.get(null).contains("weight"));
         Assertions.assertNull(prettyPrintIncorrectAnimals.get("Sasha"));
 

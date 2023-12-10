@@ -15,7 +15,7 @@ public class Task8 {
      */
     public boolean knightBoardCapture(int[][] board) {
         if (board == null || board.length != BOARD_SIZE || board[0].length != BOARD_SIZE) {
-            throw new IllegalArgumentException("input board should be " + BOARD_SIZE + "x" + BOARD_SIZE);
+            throw new IllegalArgumentException("input board should be " + BOARD_SIZE + "minX" + BOARD_SIZE);
         }
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {

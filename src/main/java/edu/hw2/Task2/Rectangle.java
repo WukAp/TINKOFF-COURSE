@@ -18,20 +18,20 @@ public class Rectangle {
     }
 
     /**
-     * creates a triangle with a new width
+     * creates a triangle with a new maxX
      *
      * @param width the new side
-     * @return the new Rectangle with changed width
+     * @return the new Rectangle with changed maxX
      */
     public Rectangle setWidth(int width) {
         return new Rectangle(width, this.height);
     }
 
     /**
-     * creates a triangle with a new height
+     * creates a triangle with a new maxY
      *
      * @param height the new side
-     * @return the new Rectangle with changed height
+     * @return the new Rectangle with changed maxY
      */
     public Rectangle setHeight(int height) {
         return new Rectangle(this.width, height);
@@ -68,7 +68,7 @@ public class Rectangle {
 
     @Override
     public String toString() {
-        return "Rectangle{" + "width=" + width + ", height=" + height + '}';
+        return "Rectangle{" + "maxX=" + width + ", maxY=" + height + '}';
     }
 
     @Override
