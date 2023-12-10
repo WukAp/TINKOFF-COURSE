@@ -2,7 +2,7 @@ package edu.project4.transformations;
 
 import edu.project4.models.Point;
 
-public class SinTransformation implements Transformation {
+public class SinTransformation extends TransformationWithColor {
     @Override
     public Point apply(Point point) {
         double x = Math.sin(point.x());

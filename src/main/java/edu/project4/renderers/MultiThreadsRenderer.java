@@ -5,6 +5,7 @@ import edu.project4.models.FractalImage;
 import edu.project4.models.Pixel;
 import edu.project4.models.Point;
 import edu.project4.models.Rect;
+import edu.project4.transformations.AffineTransformation;
 import edu.project4.transformations.Transformation;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class MultiThreadsRenderer implements Renderer {
         final int height,
         final Rect world,
         final List<Transformation> variations,
+        final List<AffineTransformation> affineTransformations,
         final int samples,
         final short iterationsPerSample,
         final int symmetry
@@ -39,7 +41,7 @@ public class MultiThreadsRenderer implements Renderer {
             tasks.add(() -> new OneThreadRenderer().render(
                 width, height,
                 world,
-                variations,
+                variations, affineTransformations,
                 samples / threadAmount,
                 iterationsPerSample
             ));

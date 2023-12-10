@@ -1,6 +1,8 @@
 package edu.project4.downloading;
 
+import edu.project4.models.Color;
 import edu.project4.renderers.MultiThreadsRenderer;
+import edu.project4.transformations.AffineTransformation;
 import edu.project4.transformations.CylinderTransformation;
 import edu.project4.transformations.DiamondTransformation;
 import edu.project4.transformations.DiscTransformation;
@@ -30,7 +32,10 @@ class ImageUtilsTest {
 
             1000, 1000, new Rect(-1, 1, -1, 1), List.of(
 
-                new DiamondTransformation(), new SphericalTransformation(), new DiscTransformation()), 10000, a
+                new DiamondTransformation(), new SphericalTransformation(), new DiscTransformation()),
+            List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
+                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
+                AffineTransformation.randomTransformation(new Color(120, 100, 3))), 10000, a
 
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic1"), ImageFormat.PNG);
@@ -48,7 +53,9 @@ class ImageUtilsTest {
                 new DiscTransformation(),
                 new CylinderTransformation(),
                 new HeartTransformation()
-            ), 10000, a
+            ), List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
+                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
+                AffineTransformation.randomTransformation(new Color(120, 100, 3))),10000, a
 
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic2"), ImageFormat.PNG);
@@ -64,7 +71,10 @@ class ImageUtilsTest {
                 new SpiralTransformation(),
                 new PolarTransformation(),
                 new DiamondTransformation()
-            ), 40000, a
+            ),
+            List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
+                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
+                    AffineTransformation.randomTransformation(new Color(120, 100, 3))), 40000, a
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3"), ImageFormat.PNG);
     }
@@ -79,7 +89,9 @@ class ImageUtilsTest {
                 new SpiralTransformation(),
                 new PolarTransformation(),
                 new DiamondTransformation()
-            ), 40000, a
+            ),List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
+                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
+                AffineTransformation.randomTransformation(new Color(120, 100, 3))), 40000, a
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3multi"), ImageFormat.PNG);
     }
@@ -93,7 +105,9 @@ class ImageUtilsTest {
                 new HandkerchiefTransformation(),
                 new SwirlTransformation(),
                 new HorseshoeTransformation()
-            ), 40000, a
+            ), List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
+                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
+                AffineTransformation.randomTransformation(new Color(120, 100, 3))),40000, a
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic4"), ImageFormat.PNG);
     }
