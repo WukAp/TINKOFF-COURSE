@@ -33,7 +33,7 @@ class ImageUtilsTest {
                 new DiamondTransformation(), new SphericalTransformation(), new DiscTransformation()), 10000, a
 
         );
-        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic"), ImageFormat.PNG);
+        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic1"), ImageFormat.PNG);
     }
 
     @Test void save2() {
