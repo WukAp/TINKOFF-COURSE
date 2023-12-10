@@ -1,5 +1,6 @@
 package edu.project4.downloading;
 
+import edu.project4.renderers.MultiThreadsRenderer;
 import edu.project4.transformations.CylinderTransformation;
 import edu.project4.transformations.DiamondTransformation;
 import edu.project4.transformations.DiscTransformation;
@@ -49,6 +50,7 @@ class ImageUtilsTest {
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic2"), ImageFormat.PNG);
     }
+
     @Test void save3() {
         Renderer renderer = new OneThreadRenderer();
         short a = 100;
@@ -56,11 +58,26 @@ class ImageUtilsTest {
 
             1000, 1000, new Rect(-1, 1, -1, 1), List.of(
 
-               new SpiralTransformation(),
+                new SpiralTransformation(),
                 new PolarTransformation(),
                 new DiamondTransformation()
-            ), 10000, a
+            ), 4000, a
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3"), ImageFormat.PNG);
+    }
+
+    @Test void save3MultiThread() {
+        Renderer renderer = new MultiThreadsRenderer(5);
+        short a = 100;
+        var canvas = renderer.render(
+
+            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
+
+                new SpiralTransformation(),
+                new PolarTransformation(),
+                new DiamondTransformation()
+            ), 4000, a
+        );
+        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3multi"), ImageFormat.PNG);
     }
 }

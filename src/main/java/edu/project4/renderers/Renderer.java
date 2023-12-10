@@ -14,7 +14,7 @@ public interface Renderer {
         Rect world,
         List<Transformation> variations,
         int samples,
-        short iterPerSample,
+        short iterationsPerSample,
         int symmetry
     );
 
@@ -24,8 +24,8 @@ public interface Renderer {
         Rect world,
         List<Transformation> variations,
         int samples,
-        short iterPerSample
+        short iterationsPerSample
     ) {
-        return render(width, height, world, variations, samples, iterPerSample, 1);
+        return render(width, height, world, variations, samples, iterationsPerSample, 1);
     }
 }
