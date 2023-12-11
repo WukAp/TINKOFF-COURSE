@@ -4,7 +4,10 @@ import edu.project4.models.Color;
 import edu.project4.models.Point;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class AffineTransformation extends TransformationWithColor {
+public class AffineTransformation implements Transformation {
+
+    public static final Color DEFAULT_COLOR = new Color(255, 255, 100);
+    private final Color color;
     private final static double DEFAULT_BORDER = 0.5;
     private final double a;
     private final double b;
@@ -13,38 +16,29 @@ public class AffineTransformation extends TransformationWithColor {
     private final double e;
     private final double f;
 
-    @Override public Point apply(Point point) {
+    public AffineTransformation(
+        double a, double b, double c, double d, double e, double f, Color color
+    ) {
+        this.color = color;
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+        this.e = e;
+        this.f = f;
+    }
+
+
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
+    public Point apply(Point point) {
         double x = a * point.x() + b * point.y() + c;
         double y = d * point.x() + e * point.y() + f;
 
         return new Point(x, y);
-    }
-
-    public AffineTransformation(
-        double a, double b, double c, double d, double e, double f
-    ) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
-        this.e = e;
-        this.f = f;
-    }
-
-    public AffineTransformation(
-        double a, double b, double c, double d, double e, double f, Color color
-    ) {
-        super(color);
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
-        this.e = e;
-        this.f = f;
-    }
-
-    public static AffineTransformation randomTransformation() {
-        return randomTransformation(DEFAULT_COLOR);
     }
 
     public static AffineTransformation randomTransformation(Color color, double border) {
@@ -77,7 +71,10 @@ public class AffineTransformation extends TransformationWithColor {
     }
 
     public static AffineTransformation randomTransformation(Color color) {
-
         return randomTransformation(color, DEFAULT_BORDER);
+    }
+
+    public static AffineTransformation randomTransformation() {
+        return randomTransformation(DEFAULT_COLOR, DEFAULT_BORDER);
     }
 }

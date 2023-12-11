@@ -2,7 +2,7 @@ package edu.project4.transformations;
 
 import edu.project4.models.Point;
 
-public class HeartTransformation extends TransformationWithColor {
+public class HeartTransformation implements Transformation {
     @Override
     public Point apply(Point point) {
         double radius = radius(point);

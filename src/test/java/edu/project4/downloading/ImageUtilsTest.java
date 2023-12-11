@@ -1,8 +1,10 @@
 package edu.project4.downloading;
 
 import edu.project4.models.Color;
+import edu.project4.models.FractalImage;
 import edu.project4.postProcessing.GammaCorrection;
 import edu.project4.renderers.MultiThreadsRenderer;
+import edu.project4.renderers.RendererTest;
 import edu.project4.transformations.AffineTransformation;
 import edu.project4.transformations.CylinderTransformation;
 import edu.project4.transformations.DiamondTransformation;
@@ -20,118 +22,32 @@ import edu.project4.renderers.OneThreadRenderer;
 import edu.project4.renderers.Renderer;
 import edu.project4.transformations.SwirlTransformation;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Stream;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ImageUtilsTest {
 
-    @Test void save1() throws IOException {
-        Renderer renderer = new OneThreadRenderer();
-        short a = 100;
-        var canvas = renderer.render(
-
-            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
-
-                new DiamondTransformation(), new SphericalTransformation(), new DiscTransformation()),
-            List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
-                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
-                AffineTransformation.randomTransformation(new Color(120, 100, 3))), 10000, a
-
-        );
-        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic1"), ImageFormat.PNG);
+    @ParameterizedTest
+    @EnumSource(ImageFormat.class)
+    void save(ImageFormat format) {
+        var canvas = getFractal();
+        assertDoesNotThrow(() -> ImageUtils.save(canvas, Path.of("src/main/resources/project4/save"), format));
+        assertTrue(new File("src/main/resources/project4/save." + format.name().toLowerCase()).exists());
     }
 
-    @Test void save2() throws IOException {
-        Renderer renderer = new OneThreadRenderer();
-        short a = 100;
-        var canvas = renderer.render(
-
-            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
-
-                new HyperbolicTransformation(),
-                new FisheyeTransformation(),
-                new DiscTransformation(),
-                new CylinderTransformation(),
-                new HeartTransformation()
-            ), List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
-                AffineTransformation.randomTransformation(new Color(12, 10, 300)),
-                AffineTransformation.randomTransformation(new Color(120, 100, 3))),10000, a
-
-        );
-        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic2"), ImageFormat.PNG);
-    }
-
-    @Test void save3() throws IOException {
-        Renderer renderer = new OneThreadRenderer();
-        short a = 100;
-        var canvas = renderer.render(
-
-            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
-
-                new SpiralTransformation(),
-                new PolarTransformation(),
-                new DiamondTransformation()
-            ),
-            List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
-                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
-                    AffineTransformation.randomTransformation(new Color(120, 100, 3))), 40000, a
-        );
-        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3"), ImageFormat.PNG);
-    }
-
-    @Test void save3MultiThread() throws IOException {
-        Renderer renderer = new MultiThreadsRenderer(15);
-        short a = 100;
-        var canvas = renderer.render(
-
-            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
-
-                new SpiralTransformation(),
-                new PolarTransformation(),
-                new DiamondTransformation()
-            ),List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
-                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
-                AffineTransformation.randomTransformation(new Color(120, 100, 3))), 40000, a
-        );
-        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3multi"), ImageFormat.PNG);
-    }
-    @Test void save4() throws IOException {
-        Renderer renderer = new OneThreadRenderer();
-        short a = 100;
-        var canvas = renderer.render(
-
-            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
-
-                new HandkerchiefTransformation(),
-                new SwirlTransformation(),
-                new HorseshoeTransformation()
-            ), List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
-                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
-                AffineTransformation.randomTransformation(new Color(120, 100, 3))),40000, a
-        );
-        ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic4"), ImageFormat.PNG);
-    }
-    @Test void save5Correction() throws IOException {
+    private FractalImage getFractal() {
         Renderer renderer = new MultiThreadsRenderer(10);
-        short a = 100;
-        var canvas = renderer.render(
-
-            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
-
-
-                new HeartTransformation(),
-                new DiamondTransformation(),
-                new DiscTransformation()
-            ), List.of(
-                AffineTransformation.randomTransformation(new Color(255, 215, 0)),
-                AffineTransformation.randomTransformation(new Color(240, 120, 0)),
-                AffineTransformation.randomTransformation(new Color(255, 255, 180))),
-            50000, a, 6
-        );
-        GammaCorrection gammaCorrection = new GammaCorrection(2.5);
-        ImageUtils.save(gammaCorrection.process(canvas), Path.of("src/main/resources/project4/pic5"), ImageFormat.PNG);
+        return RendererTest.getFractal(renderer);
     }
 
 }

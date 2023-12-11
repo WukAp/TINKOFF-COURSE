@@ -2,7 +2,7 @@ package edu.project4.transformations;
 
 import edu.project4.models.Point;
 
-public class HyperbolicTransformation extends TransformationWithColor {
+public class HyperbolicTransformation implements Transformation {
     @Override
     public Point apply(Point point) {
         double radius = radius(point);

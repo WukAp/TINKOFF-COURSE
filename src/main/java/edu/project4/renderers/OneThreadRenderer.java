@@ -30,7 +30,10 @@ public class OneThreadRenderer implements Renderer {
             Point pointInWorld = random(world);
 
             for (short step = -EMPTY_STEPS; step < iterationsPerSample; ++step) {
-                Transformation variation = random(variations);
+
+                Transformation variation = variations.get(
+                    threadLocalRandom.nextInt(variations.size())
+                );
 
                 AffineTransformation affineTransformation = affineTransformations.get(
                     threadLocalRandom.nextInt(affineTransformations.size())
@@ -59,16 +62,9 @@ public class OneThreadRenderer implements Renderer {
         );
     }
 
-    public Transformation random(List<Transformation> variations) {
-        return variations.get(
-            threadLocalRandom.nextInt(variations.size())
-        );
-    }
-
     public Point rotate(Point pw, double theta2) {
         return new Point(
             pw.x() * Math.cos(theta2) - pw.y() * Math.sin(theta2),
-
             pw.x() * Math.sin(theta2) + pw.y() * Math.cos(theta2)
         );
     }
