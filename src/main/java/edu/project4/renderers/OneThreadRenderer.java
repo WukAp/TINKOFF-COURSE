@@ -1,6 +1,5 @@
 package edu.project4.renderers;
 
-import edu.project4.models.Color;
 import edu.project4.models.FractalImage;
 import edu.project4.models.Point;
 import edu.project4.models.Rect;
@@ -12,7 +11,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class OneThreadRenderer implements Renderer {
     private final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private final static int EMPTY_STEPS = 20;
-    private final static Color DEFAULT_COLOR = new Color(200, 50, 200);
 
     @SuppressWarnings("ParameterNumber")
     @Override
@@ -24,7 +22,7 @@ public class OneThreadRenderer implements Renderer {
         List<AffineTransformation> affineTransformations,
         int samples,
         short iterationsPerSample,
-        double symmetry
+        int symmetry
     ) {
         FractalImage canvas = FractalImage.create(width, height);
 
@@ -43,17 +41,9 @@ public class OneThreadRenderer implements Renderer {
                     double theta2 = 0.0;
                     for (int s = 0; s < symmetry; theta2 += Math.PI * 2 / symmetry, s++) {
                         var rotatedPoint = rotate(pointInWorld, theta2);
-                        if (!world.contains(rotatedPoint)) {
-                            continue;
-                        }
 
                         Point point = mapRange(world, rotatedPoint, canvas);
-                        if (point == null) {
-                            continue;
-                        }
                         canvas.add(point, affineTransformation.getColor());
-                        // 1. делаем лок на время работы с пикселем
-                        // 2. подмешиваем цвет и увеличиваем hit count
                     }
                 }
 

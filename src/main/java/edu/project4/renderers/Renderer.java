@@ -18,7 +18,7 @@ public interface Renderer {
         List<AffineTransformation> affineTransformations,
         int samples,
         short iterationsPerSample,
-        double symmetry
+        int symmetry
     );
 
     default FractalImage render(

@@ -113,7 +113,7 @@ class ImageUtilsTest {
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic4"), ImageFormat.PNG);
     }
     @Test void save5Correction() {
-        Renderer renderer = new OneThreadRenderer();
+        Renderer renderer = new MultiThreadsRenderer(10);
         short a = 100;
         var canvas = renderer.render(
 

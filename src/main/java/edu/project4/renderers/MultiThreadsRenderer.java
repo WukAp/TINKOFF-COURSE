@@ -27,14 +27,14 @@ public class MultiThreadsRenderer implements Renderer {
     @SuppressWarnings("ParameterNumber")
     @Override
     public FractalImage render(
-        final int width,
-        final int height,
-        final Rect world,
-        final List<Transformation> variations,
-        final List<AffineTransformation> affineTransformations,
-        final int samples,
-        final short iterationsPerSample,
-        final double symmetry
+        int width,
+        int height,
+        Rect world,
+        List<Transformation> variations,
+        List<AffineTransformation> affineTransformations,
+        int samples,
+        short iterationsPerSample,
+        int symmetry
     ) {
         List<Callable<FractalImage>> tasks = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public class MultiThreadsRenderer implements Renderer {
                 world,
                 variations, affineTransformations,
                 samples / threadAmount,
-                iterationsPerSample
+                iterationsPerSample, symmetry
             ));
         }
 
