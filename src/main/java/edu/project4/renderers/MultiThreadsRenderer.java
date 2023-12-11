@@ -34,7 +34,7 @@ public class MultiThreadsRenderer implements Renderer {
         final List<AffineTransformation> affineTransformations,
         final int samples,
         final short iterationsPerSample,
-        final int symmetry
+        final double symmetry
     ) {
         List<Callable<FractalImage>> tasks = new ArrayList<>();
 

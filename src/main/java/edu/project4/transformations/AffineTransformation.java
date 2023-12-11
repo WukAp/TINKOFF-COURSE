@@ -5,6 +5,7 @@ import edu.project4.models.Point;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class AffineTransformation extends TransformationWithColor {
+    private final static double DEFAULT_BORDER = 0.5;
     private final double a;
     private final double b;
     private final double c;
@@ -46,9 +47,8 @@ public class AffineTransformation extends TransformationWithColor {
         return randomTransformation(DEFAULT_COLOR);
     }
 
-    public static AffineTransformation randomTransformation(Color color) {
+    public static AffineTransformation randomTransformation(Color color, double border) {
 
-        final double BORDER = 0.3;
         ThreadLocalRandom rand = ThreadLocalRandom.current();
         double a;
         double b;
@@ -70,10 +70,14 @@ public class AffineTransformation extends TransformationWithColor {
             } while ((b * b + e * e) > 1);
         } while ((a * a + b * b + d * d + e * e) > (1 + (a * e - d * b) * (a * e - d * b)));
 
-        c = rand.nextDouble(-BORDER, BORDER);
-        f = rand.nextDouble(-BORDER, BORDER);
+        c = rand.nextDouble(-border, border);
+        f = rand.nextDouble(-border, border);
 
         return new AffineTransformation(a, b, c, d, e, f, color);
     }
 
+    public static AffineTransformation randomTransformation(Color color) {
+
+        return randomTransformation(color, DEFAULT_BORDER);
+    }
 }

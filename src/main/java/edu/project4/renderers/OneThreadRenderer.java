@@ -24,7 +24,7 @@ public class OneThreadRenderer implements Renderer {
         List<AffineTransformation> affineTransformations,
         int samples,
         short iterationsPerSample,
-        int symmetry
+        double symmetry
     ) {
         FractalImage canvas = FractalImage.create(width, height);
 
@@ -35,13 +35,13 @@ public class OneThreadRenderer implements Renderer {
                 Transformation variation = random(variations);
 
                 AffineTransformation affineTransformation = affineTransformations.get(
-                    threadLocalRandom.nextInt(variations.size())
+                    threadLocalRandom.nextInt(affineTransformations.size())
                 );
 
                 pointInWorld = affineTransformation.apply(variation.apply(pointInWorld));
                 if (step >= 0 && world.contains(pointInWorld)) {
                     double theta2 = 0.0;
-                    for (int s = 0; s < symmetry; theta2 += Math.PI * 2 / symmetry, ++s) {
+                    for (int s = 0; s < symmetry; theta2 += Math.PI * 2 / symmetry, s++) {
                         var rotatedPoint = rotate(pointInWorld, theta2);
                         if (!world.contains(rotatedPoint)) {
                             continue;

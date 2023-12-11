@@ -1,6 +1,7 @@
 package edu.project4.downloading;
 
 import edu.project4.models.Color;
+import edu.project4.postProcessing.GammaCorrection;
 import edu.project4.renderers.MultiThreadsRenderer;
 import edu.project4.transformations.AffineTransformation;
 import edu.project4.transformations.CylinderTransformation;
@@ -54,7 +55,7 @@ class ImageUtilsTest {
                 new CylinderTransformation(),
                 new HeartTransformation()
             ), List.of(AffineTransformation.randomTransformation(new Color(12, 100, 3)),
-                AffineTransformation.randomTransformation(new Color(12, 10, 3)),
+                AffineTransformation.randomTransformation(new Color(12, 10, 300)),
                 AffineTransformation.randomTransformation(new Color(120, 100, 3))),10000, a
 
         );
@@ -110,6 +111,26 @@ class ImageUtilsTest {
                 AffineTransformation.randomTransformation(new Color(120, 100, 3))),40000, a
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic4"), ImageFormat.PNG);
+    }
+    @Test void save5Correction() {
+        Renderer renderer = new OneThreadRenderer();
+        short a = 100;
+        var canvas = renderer.render(
+
+            1000, 1000, new Rect(-1, 1, -1, 1), List.of(
+
+
+                new HeartTransformation(),
+                new DiamondTransformation(),
+                new DiscTransformation()
+            ), List.of(
+                AffineTransformation.randomTransformation(new Color(255, 215, 0)),
+                AffineTransformation.randomTransformation(new Color(240, 120, 0)),
+                AffineTransformation.randomTransformation(new Color(255, 255, 180))),
+            50000, a, 6
+        );
+        GammaCorrection gammaCorrection = new GammaCorrection(2.5);
+        ImageUtils.save(gammaCorrection.process(canvas), Path.of("src/main/resources/project4/pic5"), ImageFormat.PNG);
     }
 
 }

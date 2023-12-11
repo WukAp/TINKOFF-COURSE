@@ -24,6 +24,7 @@ public record FractalImage(Map<Point, Pixel> data, int width, int height) {
     public boolean add(Point point, Color color) {
         if (isCoordinateInGrid(point)) {
             if (contains(point)) {
+
                 data.put(point, pixel(point).getPixelWithIncrementedHitCount());
 
                 return true;
