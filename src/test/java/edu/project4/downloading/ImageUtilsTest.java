@@ -21,12 +21,13 @@ import edu.project4.renderers.Renderer;
 import edu.project4.transformations.SwirlTransformation;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
 class ImageUtilsTest {
 
-    @Test void save1() {
+    @Test void save1() throws IOException {
         Renderer renderer = new OneThreadRenderer();
         short a = 100;
         var canvas = renderer.render(
@@ -42,7 +43,7 @@ class ImageUtilsTest {
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic1"), ImageFormat.PNG);
     }
 
-    @Test void save2() {
+    @Test void save2() throws IOException {
         Renderer renderer = new OneThreadRenderer();
         short a = 100;
         var canvas = renderer.render(
@@ -62,7 +63,7 @@ class ImageUtilsTest {
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic2"), ImageFormat.PNG);
     }
 
-    @Test void save3() {
+    @Test void save3() throws IOException {
         Renderer renderer = new OneThreadRenderer();
         short a = 100;
         var canvas = renderer.render(
@@ -80,7 +81,7 @@ class ImageUtilsTest {
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3"), ImageFormat.PNG);
     }
 
-    @Test void save3MultiThread() {
+    @Test void save3MultiThread() throws IOException {
         Renderer renderer = new MultiThreadsRenderer(15);
         short a = 100;
         var canvas = renderer.render(
@@ -96,7 +97,7 @@ class ImageUtilsTest {
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic3multi"), ImageFormat.PNG);
     }
-    @Test void save4() {
+    @Test void save4() throws IOException {
         Renderer renderer = new OneThreadRenderer();
         short a = 100;
         var canvas = renderer.render(
@@ -112,7 +113,7 @@ class ImageUtilsTest {
         );
         ImageUtils.save(canvas, Path.of("src/main/resources/project4/pic4"), ImageFormat.PNG);
     }
-    @Test void save5Correction() {
+    @Test void save5Correction() throws IOException {
         Renderer renderer = new MultiThreadsRenderer(10);
         short a = 100;
         var canvas = renderer.render(
