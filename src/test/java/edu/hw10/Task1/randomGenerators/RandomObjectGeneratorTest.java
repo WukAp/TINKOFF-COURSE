@@ -1,9 +1,8 @@
 package edu.hw10.Task1.randomGenerators;
 
-import edu.hw10.Task10.randomGenerators.RandomObjectGenerator;
-import edu.hw10.Task10.randomGenerators.RandomSimpleGenerator;
-import edu.hw10.Task10.annotations.Max;
-import edu.hw10.Task10.annotations.Min;
+import edu.hw10.Task1.annotations.NotNull;
+import edu.hw10.Task1.annotations.Max;
+import edu.hw10.Task1.annotations.Min;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -65,13 +64,12 @@ class RandomObjectGeneratorTest {
             DogWithFactory.class.getMethod(
                 "create",
                 String.class,
-                Integer.class
+                Integer.class,
+                Record1.class // will be null
             ));
 
         assertInstanceOf(DogWithFactory.class, dogWithFactory);
-        System.out.println(dogWithFactory);
         assertTrue(dogWithFactory.age >= 0 && dogWithFactory.age < 30);
-
     }
 
     @Test
@@ -81,6 +79,15 @@ class RandomObjectGeneratorTest {
         assertTrue(recordAnnotated.f() < 4 && recordAnnotated.f() >= 3);
         assertEquals(3, (int) recordAnnotated.i());
         assertEquals(3, (long) recordAnnotated.l());
+
+
+        assertThrows(RuntimeException.class, () -> generator.nextObject(
+            DogWithNotnullRecord.class.getMethod(
+                "create",
+                String.class,
+                Integer.class,
+                Record1.class //@notNull
+            )));
     }
 
     public record Record1(Double a, Integer b) {
@@ -105,7 +112,6 @@ class RandomObjectGeneratorTest {
 
     public record RecordAnnotated(@Min(3) @Max(4) Double d, @Min(3) @Max(4) Float f, @Min(3) @Max(4) Integer i,
                                   @Min(3) @Max(4) Long l) {
-
     }
 
     public static class Dog {
@@ -122,19 +128,26 @@ class RandomObjectGeneratorTest {
         private String name;
         private int age;
 
-        @Override public String toString() {
-            return "DogWithFactory{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-        }
-
         private DogWithFactory(String name, Integer age) {
             this.name = name;
             this.age = age;
         }
 
-        public static DogWithFactory create(String name, @Min(0) @Max(30) Integer age) {
+        public static DogWithFactory create(String name, @Min(0) @Max(30) Integer age, Record1 r) {
+            return new DogWithFactory(name, age);
+        }
+    }
+
+    public static class DogWithNotnullRecord {
+        private String name;
+        private int age;
+
+        private DogWithNotnullRecord(String name, Integer age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public static DogWithFactory create(String name, @Min(0) @Max(30) Integer age, @NotNull Record1 r) {
             return new DogWithFactory(name, age);
         }
     }

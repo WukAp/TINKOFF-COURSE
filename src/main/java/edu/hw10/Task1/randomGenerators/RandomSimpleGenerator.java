@@ -1,4 +1,4 @@
-package edu.hw10.Task10.randomGenerators;
+package edu.hw10.Task1.randomGenerators;
 
 import java.lang.reflect.Parameter;
 

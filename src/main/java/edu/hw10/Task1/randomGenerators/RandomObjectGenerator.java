@@ -1,6 +1,6 @@
-package edu.hw10.Task10.randomGenerators;
+package edu.hw10.Task1.randomGenerators;
 
-import edu.hw10.Task10.annotations.NotNull;
+import edu.hw10.Task1.annotations.NotNull;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.List;
