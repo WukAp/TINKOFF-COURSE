@@ -1,5 +1,7 @@
-package edu.hw10.randomGenerators;
+package edu.hw10.Task1.randomGenerators;
 
+import edu.hw10.Task10.randomGenerators.DefaultRandomSimpleGenerators;
+import edu.hw10.Task10.randomGenerators.RandomSimpleGenerator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;

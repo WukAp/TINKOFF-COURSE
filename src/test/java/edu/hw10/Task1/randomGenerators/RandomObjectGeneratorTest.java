@@ -1,7 +1,9 @@
-package edu.hw10.randomGenerators;
+package edu.hw10.Task1.randomGenerators;
 
-import edu.hw10.annotations.Max;
-import edu.hw10.annotations.Min;
+import edu.hw10.Task10.randomGenerators.RandomObjectGenerator;
+import edu.hw10.Task10.randomGenerators.RandomSimpleGenerator;
+import edu.hw10.Task10.annotations.Max;
+import edu.hw10.Task10.annotations.Min;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

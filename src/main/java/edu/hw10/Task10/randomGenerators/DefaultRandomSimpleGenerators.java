@@ -1,7 +1,7 @@
-package edu.hw10.randomGenerators;
+package edu.hw10.Task10.randomGenerators;
 
-import edu.hw10.annotations.Max;
-import edu.hw10.annotations.Min;
+import edu.hw10.Task10.annotations.Max;
+import edu.hw10.Task10.annotations.Min;
 import java.lang.reflect.Parameter;
 import java.security.SecureRandom;
 import java.util.List;

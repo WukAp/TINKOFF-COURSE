@@ -1,4 +1,4 @@
-package edu.hw10.annotations;
+package edu.hw10.Task10.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,5 +7,6 @@ import java.lang.annotation.Target;
 
 @Target(value = ElementType.PARAMETER)
 @Retention(value = RetentionPolicy.RUNTIME)
-public @interface NotNull {
+public @interface Min {
+    int value();
 }
