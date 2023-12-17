@@ -101,7 +101,6 @@ class FixedThreadPoolTest {
     }
 
     private long getFibonacci(int n) {
-        System.out.println(n);
         switch (n) {
             case 1:
                 return 0;
