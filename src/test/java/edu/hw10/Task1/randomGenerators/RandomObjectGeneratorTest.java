@@ -86,7 +86,7 @@ class RandomObjectGeneratorTest {
                 "create",
                 String.class,
                 Integer.class,
-                Record1.class //@notNull
+                Record1.class //@NotNull
             )));
     }
 
