@@ -16,7 +16,7 @@ class AbstractFilterTest {
     void filter() throws IOException {
 MyFilters myFilters = new MyFilters();
 
-        Path path = Paths.get("testFiles");
+        Path path = Paths.get("src/main/resources/testFiles");
         DirectoryStream.Filter<Path> filter = regularFile
             .and(readable)
             .and(myFilters.largerThan(100_000))
@@ -34,7 +34,7 @@ MyFilters myFilters = new MyFilters();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(path, filter)) {
             var iterator = entries.iterator();
             assertTrue(iterator.hasNext());
-            assertEquals("testFiles/images.jpeg", iterator.next().toString());
+            assertEquals("src/main/resources/testFiles/images.jpeg", iterator.next().toString());
             assertFalse(iterator.hasNext());
         }
         filter = regularFile
@@ -43,7 +43,7 @@ MyFilters myFilters = new MyFilters();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(path, filter)) {
             var iterator = entries.iterator();
             assertTrue(iterator.hasNext());
-            assertEquals("testFiles/images.jpeg", iterator.next().toString());
+            assertEquals("src/main/resources/testFiles/images.jpeg", iterator.next().toString());
             assertFalse(iterator.hasNext());
         }
     }
