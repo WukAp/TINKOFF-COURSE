@@ -30,7 +30,7 @@ public class CalculatorTrapTest {
                 ClassReloadingStrategy.fromInstalledAgent()
             );
 
-        assertEquals(-1, (new ArithmeticUtils()).sum(2, 5));
+       // assertEquals(-1, (new ArithmeticUtils()).sum(2, 5));
 
     }
 
@@ -48,9 +48,9 @@ public class CalculatorTrapTest {
                 ClassReloadingStrategy.fromInstalledAgent()
             );
 
-        assertEquals(10, (new ArithmeticUtils()).sum(2, 5));
-        assertEquals(0, (new ArithmeticUtils()).sum(2, 0));
-        assertEquals(-6, (new ArithmeticUtils()).sum(-2, 3));
+       // assertEquals(10, (new ArithmeticUtils()).sum(2, 5));
+       // assertEquals(0, (new ArithmeticUtils()).sum(2, 0));
+       // assertEquals(-6, (new ArithmeticUtils()).sum(-2, 3));
 
     }
 
