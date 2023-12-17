@@ -34,8 +34,7 @@ public class MyGeneratedClassTest {
 
     @Test
     void generateClass()
-        throws InstantiationException, IllegalAccessException, NoSuchMethodException, NoSuchFieldException,
-        InvocationTargetException {
+        throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Class<?> myClass = new ByteBuddy()
             .subclass(Object.class)
             .name("MyClass")
