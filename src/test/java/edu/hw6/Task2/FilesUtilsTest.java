@@ -18,7 +18,7 @@ class FilesUtilsTest {
     @Test
     void clonePath() throws IOException {
 
-        Path path = Paths.get("testFiles", "testFile.txt");
+        Path path = Paths.get("src/main/resources/testFiles", "testFile.txt");
         deleteFileIfExists(path);
         Files.createFile(path);
 
@@ -30,21 +30,21 @@ class FilesUtilsTest {
             filesUtils.clonePath(path)
         );
 
-        assertEquals(Paths.get("testFiles", "testFile — копия.txt"), pathList.get(0));
+        assertEquals(Paths.get("src/main/resources/testFiles", "testFile — копия.txt"), pathList.get(0));
         for (int i = 1; i < pathList.size(); i++) {
-            assertEquals(Paths.get("testFiles", "testFile — копия (" + i + ").txt"), pathList.get(i));
+            assertEquals(Paths.get("src/main/resources/testFiles", "testFile — копия (" + i + ").txt"), pathList.get(i));
         }
 
         for (int i = 1; i < pathList.size(); i++) {
-            Files.delete(Paths.get("testFiles", "testFile — копия (" + i + ").txt"));
+            Files.delete(Paths.get("src/main/resources/testFiles", "testFile — копия (" + i + ").txt"));
         }
         Files.delete(path);
-        Files.delete(Paths.get("testFiles", "testFile — копия.txt"));
+        Files.delete(Paths.get("src/main/resources/testFiles", "testFile — копия.txt"));
     }
 
     @Test
     void throwsExceptionsTest() throws IOException {
-        Path path = Paths.get("testFiles", "testFile.txt");
+        Path path = Paths.get("src/main/resources/testFiles", "testFile.txt");
         deleteFileIfExists(path);
 
         FilesUtils filesUtils = new FilesUtils();
