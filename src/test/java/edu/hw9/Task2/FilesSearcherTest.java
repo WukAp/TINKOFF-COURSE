@@ -11,16 +11,16 @@ class FilesSearcherTest {
         FilesSearcher filesSearcher = new FilesSearcher();
         assertEquals(
             0,
-            filesSearcher.getAmountOfFileAsync(new File("testFilesForHw9/null"))
+            filesSearcher.getAmountOfFileAsync(new File("src/main/resources/testFilesForHw9/null"))
         );
         assertEquals(
             6003,
-            filesSearcher.getAmountOfFileAsync(new File("testFilesForHw9"))
+            filesSearcher.getAmountOfFileAsync(new File("src/main/resources/testFilesForHw9"))
         );
         assertEquals(
             1500,
             filesSearcher.getAmountOfFileAsync(new File(
-                "testFilesForHw9/directoryWith1500Files"))
+                "src/main/resources/testFilesForHw9/directoryWith1500Files"))
         );
     }
 
@@ -29,16 +29,16 @@ class FilesSearcherTest {
         FilesSearcher filesSearcher = new FilesSearcher();
         assertEquals(
             0,
-            filesSearcher.getAmountOfFileSync(new File("testFilesForHw9/null"))
+            filesSearcher.getAmountOfFileSync(new File("src/main/resources/testFilesForHw9/null"))
         );
         assertEquals(
             6003,
-            filesSearcher.getAmountOfFileSync(new File("testFilesForHw9"))
+            filesSearcher.getAmountOfFileSync(new File("src/main/resources/testFilesForHw9"))
         );
         assertEquals(
             1500,
             filesSearcher.getAmountOfFileSync(new File(
-                "testFilesForHw9/directoryWith1500Files"))
+                "src/main/resources/testFilesForHw9/directoryWith1500Files"))
         );
     }
 
@@ -46,11 +46,11 @@ class FilesSearcherTest {
     void isDirectoryContainsMoreThen1000Files() {
         FilesSearcher filesSearcher = new FilesSearcher();
         assertTrue(
-            filesSearcher.getAmountOfFileSync(new File("testFilesForHw9")) > 1000
+            filesSearcher.getAmountOfFileSync(new File("src/main/resources/testFilesForHw9")) > 1000
         );
         assertTrue(
             filesSearcher.getAmountOfFileSync(new File(
-                "testFilesForHw9/directoryWith1500Files")) > 1000
+                "src/main/resources/testFilesForHw9/directoryWith1500Files")) > 1000
         );
     }
 
@@ -61,7 +61,7 @@ class FilesSearcherTest {
             0,
             filesSearcher.getFileByPredicateAsync(
                 new File(
-                    "testFilesForHw9/null"),
+                    "src/main/resources/testFilesForHw9/null"),
                 (file) -> file.getName().matches(".*\\.txt")
             ).size()
         );
@@ -69,7 +69,7 @@ class FilesSearcherTest {
             6002,
             filesSearcher.getFileByPredicateAsync(
                 new File(
-                    "testFilesForHw9"),
+                    "src/main/resources/testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.txt")
             ).size()
         );
@@ -77,7 +77,7 @@ class FilesSearcherTest {
             1,
             filesSearcher.getFileByPredicateAsync(
                 new File(
-                    "testFilesForHw9"),
+                    "src/main/resources/testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.jpeg")
             ).size()
         );
@@ -85,7 +85,7 @@ class FilesSearcherTest {
             0,
             filesSearcher.getFileByPredicateAsync(
                 new File(
-                    "testFilesForHw9"),
+                    "src/main/resources/testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.png")
             ).size()
         );
@@ -93,7 +93,7 @@ class FilesSearcherTest {
             1,
             filesSearcher.getFileByPredicateAsync(
                 new File(
-                    "testFilesForHw9"),
+                    "src/main/resources/testFilesForHw9"),
                 (file) -> file.length() == 4571
             ).size()
         );
@@ -106,7 +106,7 @@ class FilesSearcherTest {
             0,
             filesSearcher.getFileByPredicateSync(
                 new File(
-                    "testFilesForHw9/null"),
+                    "src/main/resources/testFilesForHw9/null"),
                 (file) -> file.getName().matches(".*\\.txt")
             ).size()
         );
@@ -114,7 +114,7 @@ class FilesSearcherTest {
             6002,
             filesSearcher.getFileByPredicateSync(
                 new File(
-                    "testFilesForHw9"),
+                    "src/main/resources/testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.txt")
             ).size()
         );
@@ -122,7 +122,7 @@ class FilesSearcherTest {
             1,
             filesSearcher.getFileByPredicateSync(
                 new File(
-                    "testFilesForHw9"),
+                    "src/main/resources/testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.jpeg")
             ).size()
         );
@@ -130,7 +130,7 @@ class FilesSearcherTest {
             0,
             filesSearcher.getFileByPredicateSync(
                 new File(
-                    "testFilesForHw9"),
+                    "src/main/resources/testFilesForHw9"),
                 (file) -> file.getName().matches(".*\\.png")
             ).size()
         );
@@ -138,7 +138,7 @@ class FilesSearcherTest {
             1,
             filesSearcher.getFileByPredicateSync(
                 new File(
-                    "testFilesForHw9"),
+                    "src/main/resources/testFilesForHw9"),
                 (file) -> file.length() == 4571
             ).size()
         );
