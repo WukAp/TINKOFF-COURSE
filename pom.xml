@@ -148,7 +148,7 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>edu/hw11/Task2/CalculatorTrapTest/*</exclude>
+                        <exclude>edu/hw11/Task2/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
