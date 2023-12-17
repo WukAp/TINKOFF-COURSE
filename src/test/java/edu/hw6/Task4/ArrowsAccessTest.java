@@ -18,7 +18,7 @@ class ArrowsAccessTest {
     @Test
     void getPrintWriter() throws IOException {
         String text = "Programming is learned by writing programs. ― Brian Kernighan";
-        Path path = Paths.get("testFiles/testFileConstructor.txt");
+        Path path = Paths.get("src/main/resources/testFiles/testFileConstructor.txt");
         deleteFileIfExists(path);
         arrowsAccess.getPrintWriter(path.toString(), text);
 
