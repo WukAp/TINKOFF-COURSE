@@ -5,13 +5,8 @@ import net.bytebuddy.agent.ByteBuddyAgent;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
 import net.bytebuddy.implementation.FixedValue;
 import net.bytebuddy.implementation.MethodDelegation;
-import net.bytebuddy.implementation.bind.annotation.BindingPriority;
-import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import org.junit.jupiter.api.Test;
-import java.lang.reflect.Modifier;
-import static net.bytebuddy.matcher.ElementMatchers.isDeclaredBy;
 import static net.bytebuddy.matcher.ElementMatchers.named;
-import static net.bytebuddy.matcher.ElementMatchers.returns;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTrapTest {
