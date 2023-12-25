@@ -28,16 +28,16 @@ public class LogsDownloaderAdoc extends LogsDownloader {
         return String.valueOf(table);
     }
 
+    @Override
+    protected String getFileExtension() {
+        return ".adoc";
+    }
+
     private String getRow(List<String> rowData) {
         return rowData.stream().collect(Collectors.joining(
             TABLE_COLUMN_SPLITERATOR,
             TABLE_COLUMN_SPLITERATOR,
             System.lineSeparator()
         ));
-    }
-
-    @Override
-    protected String getFileExtension() {
-        return ".adoc";
     }
 }

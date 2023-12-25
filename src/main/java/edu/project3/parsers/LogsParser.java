@@ -5,6 +5,5 @@ import java.util.List;
 
 public abstract class LogsParser {
 
-
     public abstract List<LogRecord> getLogReports();
 }

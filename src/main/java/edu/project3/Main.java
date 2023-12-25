@@ -39,5 +39,4 @@ public class Main {
         Controller controller = new Controller(path, filter, format);
         controller.run();
     }
-
 }

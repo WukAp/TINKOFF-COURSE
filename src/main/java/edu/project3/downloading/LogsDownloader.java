@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class LogsDownloader {
-    protected static final int DEFAULT_LIMIT = 3;
+    private static final int DEFAULT_LIMIT = 3;
     private final LogReport report;
 
     public LogsDownloader(LogReport report) {
