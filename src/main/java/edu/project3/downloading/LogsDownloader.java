@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class LogsDownloader {
+    public static final String LINE_SEPARATOR = System.lineSeparator();
     private static final int DEFAULT_LIMIT = 3;
     private final LogReport report;
 
@@ -18,7 +19,7 @@ public abstract class LogsDownloader {
     public void download(String filename) throws IOException {
         try (FileWriter writer = new FileWriter(filename + getFileExtension(), false)) {
 
-            writer.write("Общая информация" + System.lineSeparator());
+            writer.write(getTableTitle("Общая информация"));
             writer.write(makeTable(
                 List.of(
                     List.of("Количество запросов", String.valueOf(report.getLogsAmount())),
@@ -26,14 +27,14 @@ public abstract class LogsDownloader {
                 ), List.of("Метрика", "Значение")
             ));
 
-            writer.write("Запрашиваемые ресурсы" + System.lineSeparator());
+            writer.write(getTableTitle("Запрашиваемые ресурсы"));
             writer.write(makeTable(
                 report.getPopularRequestsURL(DEFAULT_LIMIT).entrySet().stream().map(
                     set -> List.of(Objects.toString(set.getKey()), Objects.toString(set.getValue()))).toList(),
                 List.of("Ресурс", "Количество")
             ));
 
-            writer.write("Коды ответов" + System.lineSeparator());
+            writer.write(getTableTitle("Коды ответов"));
             writer.write(makeTable(
                 report.getPopularCodes(DEFAULT_LIMIT).entrySet().stream().map(
                     set -> List.of(
@@ -44,7 +45,7 @@ public abstract class LogsDownloader {
                 List.of("Код", "Имя", "Количество")
             ));
 
-            writer.write("Запрашиваемые методы" + System.lineSeparator());
+            writer.write(getTableTitle("Запрашиваемые методы"));
             writer.write(makeTable(
                 report.getRequestMethodCounted().entrySet().stream().map(
                     set -> List.of(
@@ -54,7 +55,7 @@ public abstract class LogsDownloader {
                 List.of("Метод", "Количество")
             ));
 
-            writer.write("Пользователи" + System.lineSeparator());
+            writer.write(getTableTitle("Пользователи"));
             writer.write(makeTable(
                 report.getActiveUsers(DEFAULT_LIMIT).entrySet().stream().map(
                     set -> List.of(
@@ -71,4 +72,8 @@ public abstract class LogsDownloader {
     protected abstract String makeTable(List<List<String>> body, List<String> headers);
 
     protected abstract String getFileExtension();
+
+    private String getTableTitle(String title) {
+        return title + LINE_SEPARATOR;
+    }
 }

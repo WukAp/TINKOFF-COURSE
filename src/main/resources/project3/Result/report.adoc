@@ -17,18 +17,18 @@
 [options="header]
 |===
 |Код|Имя|Количество
-|304|Not Modified|13335
 |404|Not Found|33878
 |200|OK|4030
+|304|Not Modified|13335
 |===
 Запрашиваемые методы
 [options="header]
 |===
 |Метод|Количество
-|GET|51386
-|POST|2
-|DELETE|1
 |HEAD|83
+|POST|2
+|GET|51386
+|DELETE|1
 |===
 Пользователи
 [options="header]

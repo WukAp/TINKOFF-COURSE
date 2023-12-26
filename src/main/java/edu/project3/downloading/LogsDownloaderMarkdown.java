@@ -17,7 +17,7 @@ public class LogsDownloaderMarkdown extends LogsDownloader {
         if (!body.isEmpty() && headers.size() != body.getFirst().size()) {
             throw new IllegalArgumentException("headers number should be equals column number");
         }
-        StringBuilder table = new StringBuilder(System.lineSeparator());
+        StringBuilder table = new StringBuilder(LINE_SEPARATOR);
 
         table.append(getRow(headers));
         table.append(getHeaderBodySpliterator(headers.size()));
@@ -37,11 +37,11 @@ public class LogsDownloaderMarkdown extends LogsDownloader {
         return rowData.stream().collect(Collectors.joining(
             TABLE_COLUMN_SPLITERATOR,
             TABLE_COLUMN_SPLITERATOR,
-            TABLE_COLUMN_SPLITERATOR + System.lineSeparator()
+            TABLE_COLUMN_SPLITERATOR + LINE_SEPARATOR
         ));
     }
 
     private String getHeaderBodySpliterator(int column) {
-        return TABLE_COLUMN_SPLITERATOR + ("-" + TABLE_COLUMN_SPLITERATOR).repeat(column) + System.lineSeparator();
+        return TABLE_COLUMN_SPLITERATOR + ("-" + TABLE_COLUMN_SPLITERATOR).repeat(column) + LINE_SEPARATOR;
     }
 }

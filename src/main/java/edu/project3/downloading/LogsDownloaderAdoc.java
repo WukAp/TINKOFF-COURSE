@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LogsDownloaderAdoc extends LogsDownloader {
-    private static final String TABLE_OPTIONS = "[options=\"header]" + System.lineSeparator();
-    private static final String TABLE_ROW_SPLITERATOR = "|===" + System.lineSeparator();
+    private static final String TABLE_OPTIONS = "[options=\"header]" + LINE_SEPARATOR;
+    private static final String TABLE_ROW_SPLITERATOR = "|===" + LINE_SEPARATOR;
     private static final String TABLE_COLUMN_SPLITERATOR = "|";
 
     public LogsDownloaderAdoc(LogReport report) {
@@ -37,7 +37,7 @@ public class LogsDownloaderAdoc extends LogsDownloader {
         return rowData.stream().collect(Collectors.joining(
             TABLE_COLUMN_SPLITERATOR,
             TABLE_COLUMN_SPLITERATOR,
-            System.lineSeparator()
+            LINE_SEPARATOR
         ));
     }
 }
