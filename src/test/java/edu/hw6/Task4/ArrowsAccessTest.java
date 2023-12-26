@@ -1,6 +1,5 @@
 package edu.hw6.Task4;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -8,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import static edu.hw6.Task1.DiskMapTest.deleteFileIfExists;
 import static org.junit.jupiter.api.Assertions.*;
 
