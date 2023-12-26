@@ -1,23 +1,10 @@
 package edu.project4.postProcessing;
 
-import edu.project4.models.Color;
 import edu.project4.models.FractalImage;
-import edu.project4.models.Rect;
 import edu.project4.renderers.MultiThreadsRenderer;
-import edu.project4.renderers.OneThreadRenderer;
 import edu.project4.renderers.Renderer;
 import edu.project4.renderers.RendererTest;
-import edu.project4.transformations.AffineTransformation;
-import edu.project4.transformations.DiamondTransformation;
-import edu.project4.transformations.DiscTransformation;
-import edu.project4.transformations.SphericalTransformation;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.List;
-import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GammaCorrectionTest {
